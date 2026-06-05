@@ -1,0 +1,6 @@
+{
+  "name": "EVRO PLAZA GROUP",
+  "description": "Премиальная жилая и коммерческая недвижимость в Узбекистане. Архитектура мирового уровня.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

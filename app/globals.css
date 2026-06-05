@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #C4A47C;
+  --color-gold-light: #DFCDAA;
+  --font-sans: var(--font-sans), sans-serif;
+  --font-heading: var(--font-heading), sans-serif;
+}
+
+/* Custom elite architectural custom utilities */
+.font-heading {
+  font-family: var(--font-heading), sans-serif;
+}
+
+/* Custom scrollbar matching dark slate tone */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #121214;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #252528;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C4A47C;
+}
+
+/* Base selection highlights */
+::selection {
+  background-color: rgba(196, 164, 124, 0.3);
+  color: #fff;
+}
+
+/* Custom elegant image hover effects */
+.scale-zoom {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scale-zoom:hover {
+  transform: scale(1.04);
+}
+
+/* Animated gradient element for background */
+.bg-grid-glow {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
