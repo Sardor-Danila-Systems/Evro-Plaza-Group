@@ -46,6 +46,25 @@
   transform: scale(1.04);
 }
 
+/* Slow cinematic zoom for hero backdrop imagery */
+@keyframes ken-burns {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+    opacity: 0.28;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.12) translate3d(-1%, -1%, 0);
+    opacity: 0.32;
+  }
+}
+
+.hero-ken-burns {
+  animation: ken-burns 22s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+}
+
 /* Animated gradient element for background */
 .bg-grid-glow {
   background-size: 40px 40px;
