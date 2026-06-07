@@ -9,10 +9,7 @@ import {
   MapPin,
   Compass,
   ArrowLeft,
-  CheckCircle,
   Building,
-  Phone,
-  User,
   ExternalLink,
   ChevronRight,
   TrendingUp,
@@ -69,13 +66,6 @@ export default function SingleProjectPage({ params }: { params: Promise<{ id: st
   // Interactive full-screen gallery lightbox states
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
 
-  // Client form states
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [submitting, setSubmitting] = useState(false);
-  const [success, setSuccess] = useState(false);
-
   // If project is not found, render a premium 404 state
   if (!project) {
     return (
@@ -95,41 +85,6 @@ export default function SingleProjectPage({ params }: { params: Promise<{ id: st
       </div>
     );
   }
-
-  // Pre-fill layout booking option to form
-  const handleSelectPlan = (idx: number) => {
-    setActivePlanIdx(idx);
-    const plan = project.plans[idx];
-    const targetElement = document.getElementById('project-booking-form');
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleInquiryAction = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name || !phone) return;
-    setSubmitting(true);
-
-    setTimeout(() => {
-      setSubmitting(false);
-      setSuccess(true);
-
-      // Save to local leads storage
-      const selectedPlanDetails = project.plans[activePlanIdx];
-      const leads = JSON.parse(localStorage.getItem('evro_leads') || '[]');
-      leads.push({
-        name,
-        phone,
-        email,
-        project: `${project.name} (Планировка: ${selectedPlanDetails?.area}, Комнат: ${selectedPlanDetails?.rooms})`,
-        id: 'L-' + Date.now(),
-        date: new Date().toLocaleDateString('ru-RU'),
-        status: 'Новый'
-      });
-      localStorage.setItem('evro_leads', JSON.stringify(leads));
-    }, 1000);
-  };
 
   return (
     <div className="pb-24">
@@ -236,12 +191,12 @@ export default function SingleProjectPage({ params }: { params: Promise<{ id: st
 
             <div className="pt-4 border-t border-white/5 space-y-3">
               <span className="text-xs text-gray-400 font-light block">Имеются сертификаты экологического надзора BREEAM.</span>
-              <a
-                href="#project-booking-form"
+              <Link
+                href="/contact"
                 className="w-full bg-[#C4A47C] text-black font-semibold uppercase py-3.5 text-center text-xs tracking-wider rounded-sm transition-all hover:bg-white block"
               >
                 Запросить документацию
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -397,127 +352,15 @@ export default function SingleProjectPage({ params }: { params: Promise<{ id: st
                 <p className="text-xs text-gray-400 font-light">
                   Стартовая цена: <strong className="text-white text-base font-semibold font-mono">{project.plans[activePlanIdx]?.price}</strong> (зависит от этажа и типа оплат)
                 </p>
-                <button
-                  onClick={() => handleSelectPlan(activePlanIdx)}
-                  className="bg-[#C4A47C] text-black font-semibold uppercase px-6 py-3 text-xs tracking-wider hover:bg-neutral-100 transition-all rounded-sm cursor-pointer"
+                <Link
+                  href="/contact"
+                  className="bg-[#C4A47C] text-black font-semibold uppercase px-6 py-3 text-xs tracking-wider hover:bg-neutral-100 transition-all rounded-sm inline-block"
                 >
-                  Забронировать эту планировку
-                </button>
+                  Узнать о планировке
+                </Link>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ================= PROJECT BOOKING SALES FORCE INQUIRY FORM ================= */}
-      <section id="project-booking-form" className="py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#1a1a1d] border border-white/10 rounded-sm p-8 sm:p-12 shadow-2xl relative">
-          
-          <div className="text-center space-y-4 mb-8">
-            <span className="text-xs uppercase tracking-widest text-[#C4A47C] font-mono bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full">
-              Запись на показ и расчет цены
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold font-heading text-white uppercase tracking-tight">
-              Интересует {project.name}?
-            </h2>
-            <p className="text-gray-400 text-xs sm:text-sm font-light max-w-md mx-auto leading-relaxed">
-              Оставьте заявку. Персональный менеджер подготовит ценовое решение, условия рассрочки на квартиру <strong className="text-white">{project.plans[activePlanIdx]?.area} ({project.plans[activePlanIdx]?.rooms} комнат)</strong> и согласует визит на стройку.
-            </p>
-          </div>
-
-          <AnimatePresence mode="wait">
-            {!success ? (
-              <motion.form
-                key="inquiry"
-                onSubmit={handleInquiryAction}
-                className="space-y-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Name input */}
-                  <div className="space-y-1.5">
-                    <label htmlFor="fullname" className="text-xs uppercase tracking-wider text-gray-400 font-mono">Ваше имя</label>
-                    <div className="relative">
-                      <User className="absolute left-3.5 top-3.5 w-4 h-4 text-gray-500" />
-                      <input
-                        id="fullname"
-                        type="text"
-                        required
-                        placeholder="Александр или Санжар"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="w-full bg-black/60 border border-white/10 rounded-sm pl-10 pr-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#C4A47C] focus:ring-1 focus:ring-[#C4A47C]/45 transition-all font-sans"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Phone input */}
-                  <div className="space-y-1.5">
-                    <label htmlFor="phonenumber" className="text-xs uppercase tracking-wider text-gray-400 font-mono">Номер телефона</label>
-                    <div className="relative">
-                      <Phone className="absolute left-3.5 top-3.5 w-4 h-4 text-gray-500" />
-                      <input
-                        id="phonenumber"
-                        type="tel"
-                        required
-                        placeholder="+998 (__) ___-__-__"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="w-full bg-black/60 border border-white/10 rounded-sm pl-10 pr-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#C4A47C] focus:ring-1 focus:ring-[#C4A47C]/45 transition-all font-sans font-mono"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-1.5">
-                  <label htmlFor="emailaddress" className="text-xs uppercase tracking-wider text-gray-400 font-mono">Электронная почта (необязательно)</label>
-                  <input
-                    id="emailaddress"
-                    type="email"
-                    placeholder="example@sales.uz"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-black/60 border border-white/10 rounded-sm px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#C4A47C] focus:ring-1 focus:ring-[#C4A47C]/45 transition-all font-sans"
-                  />
-                </div>
-
-                <div className="text-center pt-2">
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="w-full bg-[#C4A47C] text-black font-semibold uppercase py-4 text-xs tracking-wider hover:bg-neutral-100 transition-colors rounded-sm focus:outline-none cursor-pointer"
-                  >
-                    {submitting ? 'Отправка данных..' : 'Запросить расчет цены рассрочки'}
-                  </button>
-                </div>
-              </motion.form>
-            ) : (
-              <motion.div
-                key="success"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="bg-black/40 border border-green-905 p-8 rounded text-center space-y-4"
-              >
-                <div className="w-16 h-16 rounded-full bg-green-950/40 border border-green-500/40 flex items-center justify-center mx-auto text-green-400">
-                  <CheckCircle className="w-8 h-8" />
-                </div>
-                <h3 className="text-xl font-bold font-heading text-white uppercase tracking-tight">Заявка зарегистрирована!</h3>
-                <p className="text-gray-300 text-xs sm:text-sm font-light leading-relaxed max-w-sm mx-auto">
-                  Благодарим за обращение! Наш консультант свяжется с вами по указанному телефону в течение 10 минут, чтобы проинформировать об актуальных скидках на квартиру площадью <strong className="text-white">{project.plans[activePlanIdx]?.area}</strong>.
-                </p>
-                <div className="pt-2">
-                  <button
-                    onClick={() => { setName(''); setPhone(''); setSuccess(false); }}
-                    className="text-xs font-mono text-gray-400 hover:text-white transition-colors underline"
-                  >
-                    Вернуться к форме
-                  </button>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
       </section>
 
