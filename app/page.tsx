@@ -395,7 +395,7 @@ export default function Home() {
 
                     <div className="p-6 sm:p-8 flex-grow flex flex-col justify-between space-y-4">
                       <div className="space-y-2">
-                        <span className="text-[10px] uppercase tracking-widest font-mono text-gray-500 font-semibold uppercase">
+                        <span className="text-[10px] tracking-widest font-mono text-gray-500 font-semibold uppercase">
                           {project.typeLabel}
                         </span>
                         <h3 className="text-xl sm:text-2xl font-bold font-heading text-white tracking-tight uppercase group-hover:text-[#C4A47C] transition-colors">
@@ -467,7 +467,7 @@ export default function Home() {
             >
               {/* Top indicators */}
               <div className="flex justify-between items-center mb-6">
-                <span className="text-2xl font-bold font-heading text-[#C4A47C]/40 group-hover:text-[#C4A47C] transition-colors font-mono">
+                <span className="text-2xl font-bold text-[#C4A47C]/40 group-hover:text-[#C4A47C] transition-colors font-mono">
                   {benefit.idx}
                 </span>
                 <span className="text-[9px] uppercase tracking-widest font-mono text-gray-500 bg-white/5 px-2.5 py-1 rounded">
