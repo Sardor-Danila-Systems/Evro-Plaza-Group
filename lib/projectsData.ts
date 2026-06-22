@@ -37,6 +37,63 @@ export interface Project {
 
 export const projectsData: Project[] = [
   {
+    id: 'avenue-plaza',
+    name: 'Avenue Plaza',
+    tagline: 'Современный жилой комплекс премиум бизнес-класса в Самарканде',
+    description: 'Закрытый жилой комплекс премиум бизнес-класса на 14 корпусов с полной инфраструктурой: школа, детский сад, торговый центр, бассейны, фитнес-залы и более 500 паркинг-мест.',
+    longDescription: 'Avenue Plaza — современный жилой комплекс премиум бизнес-класса, который строится в Самарканде на улице Умара Жура Кулова, за ЖК "Самарканд". Комплекс отличается элегантной архитектурой с кирпичными фасадами, высокими потолками от 3 метров и продуманной закрытой территорией, что делает его особенно привлекательным для семейной жизни. На территории комплекса будет своя школа, детский сад, большой магазин, фитнес-залы, бассейны, коворкинги — вся необходимая инфраструктура в пределах охраняемой территории. Расположение на окраине города обеспечивает тишину и спокойствие, в стороне от городского шума. Комплекс состоит из 14 корпусов, построенных по монолитно-кирпичной технологии. Сейчас активно ведется строительство 4, 5, 6, 7 и 8 блоков. Несмотря на то, что объект еще не сдан в эксплуатацию, большая часть квартир уже распродана. Доступна рассрочка.',
+    status: 'construction',
+    statusLabel: 'Строится (сдача в 2027 году)',
+    type: 'mixed',
+    typeLabel: 'Жилой комплекс премиум бизнес-класса',
+    location: 'Самарканд, улица Умара Жура Кулова (за ЖК "Самарканд")',
+    city: 'Самарканд',
+    year: '2027',
+    heroImage: '/projects/avenue-plaza/gallery11.jpg',
+    gallery: [
+      '/projects/avenue-plaza/gallery.jpg',
+      '/projects/avenue-plaza/gallery1.jpg',
+      '/projects/avenue-plaza/gallery2.jpg',
+      '/projects/avenue-plaza/gallery3.jpg',
+      '/projects/avenue-plaza/gallery4.jpg',
+      '/projects/avenue-plaza/gallery5.jpg',
+      '/projects/avenue-plaza/gallery6.jpg',
+      '/projects/avenue-plaza/gallery7.jpg',
+      '/projects/avenue-plaza/gallery8.jpg',
+      '/projects/avenue-plaza/gallery9.jpg',
+      '/projects/avenue-plaza/gallery10.jpg',
+      '/projects/avenue-plaza/gallery11.jpg',
+      '/projects/avenue-plaza/gallery12.jpg'
+    ],
+    specs: [
+      { label: 'Высота потолков', value: 'от 3 м' },
+      { label: 'Количество корпусов', value: '14 зданий' },
+      { label: 'Технология строительства', value: 'Монолит + кирпич' },
+      { label: 'Паркинг', value: 'Более 500 надземных и подземных мест' },
+      { label: 'Территория', value: 'Закрытая, охраняемая' },
+      { label: 'Оплата', value: 'Рассрочка доступна' }
+    ],
+    infrastructure: [
+      { title: 'Школа и детский сад', description: 'Собственная школа и детский сад на территории комплекса для удобства семей с детьми.', icon: 'School' },
+      { title: 'Торговый центр', description: 'Большой магазин и торговая инфраструктура в пределах закрытой территории комплекса.', icon: 'ShoppingCart' },
+      { title: 'Бассейны и фитнес-залы', description: 'Несколько бассейнов и фитнес-залов для жильцов всех возрастов.', icon: 'Dumbbell' },
+      { title: 'Коворкинги', description: 'Современные коворкинг-пространства для удаленной работы и встреч.', icon: 'Briefcase' },
+      { title: 'Охраняемая территория', description: 'Закрытая, охраняемая территория с контролем доступа для безопасности жильцов.', icon: 'ShieldCheck' },
+      { title: 'Надземный и подземный паркинг', description: 'Более 500 машиномест на надземных и подземных парковках комплекса.', icon: 'Car' }
+    ],
+    constructionProgress: [
+      { stage: 'Блоки 1-3', percentage: 100 },
+      { stage: 'Блок 4', percentage: 60 },
+      { stage: 'Блоки 5-6', percentage: 45 },
+      { stage: 'Блоки 7-8', percentage: 25 }
+    ],
+    plans: [],
+  }
+];
+
+// Временно скрытые проекты — вернуть в projectsData, когда появятся данные
+export const archivedProjectsData: Project[] = [
+  {
     id: 'evro-plaza-residence',
     name: 'EVRO PLAZA Residence',
     tagline: 'Архитектурный шедевр в самом престижном районе',
