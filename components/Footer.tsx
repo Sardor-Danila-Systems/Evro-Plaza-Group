@@ -2,8 +2,10 @@
 
 import Link from 'next/link';
 import { Mail, Phone, MapPin, Space as Clock, ArrowUp, Send, Facebook, Instagram } from 'lucide-react';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 
 export default function Footer() {
+  const { t } = useTranslation();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -22,7 +24,7 @@ export default function Footer() {
               <span className="text-[#C4A47C] font-light ml-1.5 border-l border-white/20 pl-2">PLAZA</span>
             </span>
             <p className="text-gray-400 text-sm leading-relaxed antialiased">
-              Девелопер премиальной жилой и коммерческой недвижимости. Создаем новые ориентиры будущего и эстетические стандарты в Узбекистане.
+              {t('footer.description')}
             </p>
             <div className="flex items-center space-x-3 pt-4">
               <a
@@ -51,26 +53,26 @@ export default function Footer() {
 
           {/* Quick links */}
           <div className="space-y-4 md:pl-6">
-            <h4 className="text-white font-sans text-sm font-semibold uppercase tracking-wider">Навигация</h4>
+            <h4 className="text-white font-sans text-sm font-semibold uppercase tracking-wider">{t('footer.navTitle')}</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
                 <Link href="/" className="hover:text-[#C4A47C] transition-colors">
-                  Главная
+                  {t('nav.home')}
                 </Link>
               </li>
               <li>
                 <Link href="/about" className="hover:text-[#C4A47C] transition-colors">
-                  О компании
+                  {t('nav.about')}
                 </Link>
               </li>
               <li>
                 <Link href="/projects" className="hover:text-[#C4A47C] transition-colors">
-                  Портфолио проектов
+                  {t('nav.projects')}
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="hover:text-[#C4A47C] transition-colors">
-                  Контакты
+                  {t('nav.contact')}
                 </Link>
               </li>
             </ul>
@@ -78,26 +80,26 @@ export default function Footer() {
 
           {/* Property Types / Highlights */}
           <div className="space-y-4">
-            <h4 className="text-white font-sans text-sm font-semibold uppercase tracking-wider">Недвижимость</h4>
+            <h4 className="text-white font-sans text-sm font-semibold uppercase tracking-wider">{t('footer.propertyTitle')}</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
                 <Link href="/projects?type=residential" className="hover:text-[#C4A47C] transition-colors">
-                  Премиальные жилые комплексы
+                  {t('footer.propertyResidential')}
                 </Link>
               </li>
               <li>
                 <Link href="/projects?type=commercial" className="hover:text-[#C4A47C] transition-colors">
-                  Деловые и коммерческие центры
+                  {t('footer.propertyCommercial')}
                 </Link>
               </li>
               <li>
                 <Link href="/projects?type=villas" className="hover:text-[#C4A47C] transition-colors">
-                  Закрытые клубные виллы
+                  {t('footer.propertyVillas')}
                 </Link>
               </li>
               <li>
                 <Link href="/projects?status=completed" className="hover:text-[#C4A47C] transition-colors">
-                  Реализованные проекты
+                  {t('footer.propertyCompleted')}
                 </Link>
               </li>
             </ul>
@@ -105,16 +107,16 @@ export default function Footer() {
 
           {/* Core Contacts */}
           <div className="space-y-4 text-sm">
-            <h4 className="text-white font-sans text-sm font-semibold uppercase tracking-wider">Отдел продаж</h4>
+            <h4 className="text-white font-sans text-sm font-semibold uppercase tracking-wider">{t('footer.salesTitle')}</h4>
             <ul className="space-y-3 text-gray-400">
               <li className="flex items-start space-x-3">
                 <MapPin className="w-4 h-4 text-[#C4A47C] mt-0.5 shrink-0" />
-                <span>Ташкент, ул. Амира Темура, д. 1</span>
+                <span>{t('footer.address')}</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-[#C4A47C] shrink-0" />
-                <a href="tel:+998712000000" className="hover:text-white transition-colors font-mono">
-                  +998 71 200-00-00
+                <a href="tel:+998663000000" className="hover:text-white transition-colors font-mono">
+                  +998 66 300-00-00
                 </a>
               </li>
               <li className="flex items-center space-x-3">
@@ -124,7 +126,7 @@ export default function Footer() {
                 </a>
               </li>
               <li className="text-xs text-gray-500 pt-1">
-                График работы: Пн – Сб, 09:00 – 19:00 (Офис продаж)
+                {t('footer.workHours')}
               </li>
             </ul>
           </div>
@@ -132,19 +134,19 @@ export default function Footer() {
 
         {/* Footer Bottom metadata */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500">
-          <span>&copy; {new Date().getFullYear()} EVRO PLAZA GROUP. Все права защищены.</span>
+          <span>&copy; {new Date().getFullYear()} EVRO PLAZA GROUP. {t('footer.rightsReserved')}</span>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="hover:text-gray-400 transition-colors">
-              Политика конфиденциальности
+              {t('footer.privacyPolicy')}
             </a>
             <a href="#" className="hover:text-gray-400 transition-colors">
-              Условия использования
+              {t('footer.termsOfUse')}
             </a>
           </div>
           <button
             onClick={scrollToTop}
             className="mt-4 md:mt-0 bg-white/5 hover:bg-white/10 hover:text-[#C4A47C] border border-white/10 p-2.5 rounded transition-all cursor-pointer flex items-center justify-center"
-            title="Вернуться наверх"
+            title={t('footer.backToTop')}
           >
             <ArrowUp className="w-4 h-4" />
           </button>

@@ -14,8 +14,10 @@ import {
   Star
 } from 'lucide-react';
 import { projectsData } from '@/lib/projectsData';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 
 export default function Home() {
+  const { t, locale } = useTranslation();
   const [stats, setStats] = useState({ years: 0, projects: 0, families: 0, area: 0 });
   const [activeTesti, setActiveTesti] = useState(0);
   const [activeCategory, setActiveCategory] = useState<'all' | 'residential' | 'commercial'>('all');
@@ -67,52 +69,20 @@ export default function Home() {
     },
   ];
 
-  const benefits = [
-    {
-      idx: '01',
-      title: 'Архитектура высокого стиля',
-      desc: 'Сотрудничаем с ведущими международными бюро. Каждый силуэт зданий — это баланс пропорций, света и премиальных долговечных материалов.',
-      category: 'дизайн',
-    },
-    {
-      idx: '02',
-      title: 'Сейсмостойкость 9+ баллов',
-      desc: 'Высокопрочный монолитный каркас, глубокое свайное поле и сертифицированные марки бетона. Ваша стопроцентная безопасность.',
-      category: 'инженерия',
-    },
-    {
-      idx: '03',
-      title: 'Абсолютная юридическая чистота',
-      desc: 'Полный пакет документов на владение, никаких скрытых комиссий, прозрачные условия беспроцентной рассрочки и гибкие варианты оплат.',
-      category: 'сделки',
-    },
-    {
-      idx: '04',
-      title: 'Престижные локации',
-      desc: 'Строим только в лучших развитых кварталах с панорамными видами, удобными транспортными узлами и высокой зеленой плотностью.',
-      category: 'география',
-    },
-    {
-      idx: '05',
-      title: 'Круглосуточный сервис 360°',
-      desc: 'Собственная профессиональная управляющая компания PMG. Вопросы инженерии, порядка, клининга и ухода за садом решаются за пару кликов.',
-      category: 'комфорт',
-    },
-    {
-      idx: '06',
-      title: 'Доверие поколений',
-      desc: 'Собранный годами опыт позволяет гарантировать долговечность зданий. Инвестиционный потенциал наших квартир растет из поколения в поколение.',
-      category: 'инвестиции',
-    },
-  ];
+  const benefits = [0, 1, 2, 3, 4, 5].map((i) => ({
+    idx: String(i + 1).padStart(2, '0'),
+    title: t(`home.advantages.items.${i}.title`),
+    desc: t(`home.advantages.items.${i}.desc`),
+    category: t(`home.advantages.items.${i}.category`),
+  }));
 
   const galleryImages = [
-    { src: '/gallery1.jpg', label: 'Узорное остекление' },
-    { src: '/gallery2.jpg', label: 'Премиум Гостиная' },
-    { src: '/gallery7.jpg', label: 'Мраморный Лобби-Холл' },
-    { src: '/gallery4.jpg', label: 'Эстетика террас вечером' },
-    { src: '/gallery5.jpg', label: 'Стильный фасад виллы' },
-    { src: '/gallery11.jpg', label: 'Архитектурный дворик' }
+    { src: '/gallery1.jpg', label: t('home.gallery.images.0') },
+    { src: '/gallery2.jpg', label: t('home.gallery.images.1') },
+    { src: '/gallery7.jpg', label: t('home.gallery.images.2') },
+    { src: '/gallery4.jpg', label: t('home.gallery.images.3') },
+    { src: '/gallery5.jpg', label: t('home.gallery.images.4') },
+    { src: '/gallery11.jpg', label: t('home.gallery.images.5') },
   ];
 
   const filteredProjects = activeCategory === 'all'
@@ -145,7 +115,7 @@ export default function Home() {
               className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full text-xs font-medium tracking-widest text-[#C4A47C] uppercase"
             >
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Премиальный девелопмент в Узбекистане</span>
+              <span>{t('home.hero.badge')}</span>
             </motion.div>
 
             <motion.h1
@@ -154,8 +124,8 @@ export default function Home() {
               transition={{ duration: 0.9, delay: 0.1 }}
               className="text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-tight uppercase font-heading max-w-5xl mx-auto"
             >
-              Создаём ориентиры <br className="hidden md:inline" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-amber-100 to-[#C4A47C]">Будущего Узбекистана</span>
+              {t('home.hero.titleLine1')} <br className="hidden md:inline" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-amber-100 to-[#C4A47C]">{t('home.hero.titleLine2')}</span>
             </motion.h1>
 
             <motion.p
@@ -164,7 +134,7 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-gray-300 text-sm sm:text-lg max-w-2xl mx-auto font-light leading-relaxed antialiased"
             >
-              EVRO PLAZA GROUP — Синоним монументального изящества и современных семейных ценностей. Объединяем мировые стандарты строительства с лучшими локациями нашей страны.
+              {t('home.hero.subtitle')}
             </motion.p>
 
             <motion.div
@@ -177,14 +147,14 @@ export default function Home() {
                 href="/projects"
                 className="w-full sm:w-auto bg-[#C4A47C] text-black font-semibold uppercase px-8 py-4 text-xs tracking-wider hover:bg-neutral-100 hover:shadow-lg transition-all duration-300 rounded-sm flex items-center justify-center space-x-2"
               >
-                <span>Смотреть проекты</span>
+                <span>{t('home.hero.ctaProjects')}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 href="/about"
                 className="w-full sm:w-auto border border-white/20 hover:border-[#C4A47C] text-white font-medium px-8 py-4 text-xs tracking-wider hover:bg-white/5 transition-all duration-300 rounded-sm flex items-center justify-center"
               >
-                Узнать о компании
+                {t('home.hero.ctaAbout')}
               </Link>
             </motion.div>
           </div>
@@ -195,27 +165,27 @@ export default function Home() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
               <div className="space-y-1">
                 <div className="text-2xl sm:text-4xl font-bold font-heading text-white">
-                  {stats.years} <span className="text-[#C4A47C] text-lg font-light">лет</span>
+                  {stats.years} <span className="text-[#C4A47C] text-lg font-light">{t('home.hero.statYears')}</span>
                 </div>
-                <p className="text-gray-400 text-xs uppercase tracking-wider font-light">опыта на рынке</p>
+                <p className="text-gray-400 text-xs uppercase tracking-wider font-light">{t('home.hero.statYearsLabel')}</p>
               </div>
               <div className="space-y-1">
                 <div className="text-2xl sm:text-4xl font-bold font-heading text-white">
                   {stats.projects} <span className="text-[#C4A47C] text-lg font-light">+</span>
                 </div>
-                <p className="text-gray-400 text-xs uppercase tracking-wider font-light">реализованных проектов</p>
+                <p className="text-gray-400 text-xs uppercase tracking-wider font-light">{t('home.hero.statProjectsLabel')}</p>
               </div>
               <div className="space-y-1">
                 <div className="text-2xl sm:text-4xl font-bold font-heading text-white">
                   {stats.families.toLocaleString()} <span className="text-[#C4A47C] text-lg font-light">+</span>
                 </div>
-                <p className="text-gray-400 text-xs uppercase tracking-wider font-light">счастливых резидентов</p>
+                <p className="text-gray-400 text-xs uppercase tracking-wider font-light">{t('home.hero.statFamiliesLabel')}</p>
               </div>
               <div className="space-y-1">
                 <div className="text-2xl sm:text-4xl font-bold font-heading text-white">
-                  {stats.area} <span className="text-[#C4A47C] text-sm font-light">тыс. м²</span>
+                  {stats.area} <span className="text-[#C4A47C] text-sm font-light">{t('home.hero.statAreaUnit')}</span>
                 </div>
-                <p className="text-gray-400 text-xs uppercase tracking-wider font-light">жилого фонда построено</p>
+                <p className="text-gray-400 text-xs uppercase tracking-wider font-light">{t('home.hero.statAreaLabel')}</p>
               </div>
             </div>
           </div>
@@ -242,12 +212,12 @@ export default function Home() {
                 РЭ
               </div>
               <div>
-                <h4 className="text-white font-semibold text-sm">Рустам Эргашев</h4>
-                <p className="text-[#C4A47C] text-xs font-light">Основатель и генеральный директор EVRO PLAZA GROUP</p>
+                <h4 className="text-white font-semibold text-sm">{t('home.aboutTeaser.founderName')}</h4>
+                <p className="text-[#C4A47C] text-xs font-light">{t('home.aboutTeaser.founderRole')}</p>
               </div>
             </div>
             <div className="absolute top-6 left-6 bg-[#C4A47C] text-black text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-sm shadow">
-              Основана в 2013
+              {t('home.aboutTeaser.foundedBadge')}
             </div>
           </motion.div>
 
@@ -261,38 +231,38 @@ export default function Home() {
             <div className="space-y-2">
               <span className="text-xs uppercase tracking-widest text-[#C4A47C] font-semibold flex items-center space-x-2">
                 <span className="w-8 h-[1px] bg-[#C4A47C]" />
-                <span>О компании</span>
+                <span>{t('home.aboutTeaser.eyebrow')}</span>
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold font-heading text-white uppercase tracking-tight">
-                Девелопмент, где архитектура встречает надёжность
+                {t('home.aboutTeaser.title')}
               </h2>
             </div>
 
             <p className="text-gray-300 text-sm leading-relaxed font-light">
-              С 2013 года EVRO PLAZA GROUP формирует новые девелоперские горизонты в Узбекистане. Наша главная цель — проектирование знаковых зданий, сочетающих комфортную внутреннюю философию, утонченную внешнюю форму и безупречное качество инженерной сборки.
+              {t('home.aboutTeaser.paragraph1')}
             </p>
 
             <p className="text-gray-400 text-sm leading-relaxed font-light">
-              Мы верим, что дом — это фамильная крепость. Поэтому мы самостоятельно производим контроль всех фаз строительства, от калибровки грунта до финального узора лобби-подсветок. Для создания проектов привлекаются передовые европейские архитекторы и надзорные инженерные лаборатории.
+              {t('home.aboutTeaser.paragraph2')}
             </p>
 
             {/* Quick stats points */}
             <div className="grid grid-cols-2 gap-4 pt-4 text-xs font-mono">
               <div className="flex items-center space-x-2 bg-white/5 border border-white/5 p-3 rounded">
                 <CheckCircle className="w-4 h-4 text-[#C4A47C] shrink-0" />
-                <span className="text-gray-300">Собственная УК (PMG)</span>
+                <span className="text-gray-300">{t('home.aboutTeaser.pointManagement')}</span>
               </div>
               <div className="flex items-center space-x-2 bg-white/5 border border-white/5 p-3 rounded">
                 <CheckCircle className="w-4 h-4 text-[#C4A47C] shrink-0" />
-                <span className="text-gray-300">Беспроцентная рассрочка</span>
+                <span className="text-gray-300">{t('home.aboutTeaser.pointInstallments')}</span>
               </div>
               <div className="flex items-center space-x-2 bg-white/5 border border-white/5 p-3 rounded">
                 <CheckCircle className="w-4 h-4 text-[#C4A47C] shrink-0" />
-                <span className="text-gray-300">Проверенные поставщики</span>
+                <span className="text-gray-300">{t('home.aboutTeaser.pointSuppliers')}</span>
               </div>
               <div className="flex items-center space-x-2 bg-white/5 border border-white/5 p-3 rounded">
                 <CheckCircle className="w-4 h-4 text-[#C4A47C] shrink-0" />
-                <span className="text-gray-300">Материалы класса Люкс</span>
+                <span className="text-gray-300">{t('home.aboutTeaser.pointMaterials')}</span>
               </div>
             </div>
 
@@ -301,7 +271,7 @@ export default function Home() {
                 href="/about"
                 className="inline-flex items-center space-x-2 text-[#C4A47C] hover:text-white text-xs font-bold tracking-widest uppercase"
               >
-                <span>Подробнее о нашей истории</span>
+                <span>{t('home.aboutTeaser.readMore')}</span>
                 <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
@@ -315,10 +285,10 @@ export default function Home() {
             <div className="space-y-2">
               <span className="text-xs uppercase tracking-widest text-[#C4A47C] font-semibold flex items-center space-x-2">
                 <span className="w-8 h-[1px] bg-[#C4A47C]" />
-                <span>Наши проекты</span>
+                <span>{t('home.projectsSection.eyebrow')}</span>
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold font-heading text-white uppercase tracking-tight">
-                Архитектурные шедевры
+                {t('home.projectsSection.title')}
               </h2>
             </div>
 
@@ -331,7 +301,7 @@ export default function Home() {
                     : 'text-gray-400 hover:text-white'
                 }`}
               >
-                Все
+                {t('home.projectsSection.filterAll')}
               </button>
               <button
                 onClick={() => setActiveCategory('residential')}
@@ -341,7 +311,7 @@ export default function Home() {
                     : 'text-gray-400 hover:text-white'
                 }`}
               >
-                Жилые
+                {t('home.projectsSection.filterResidential')}
               </button>
               <button
                 onClick={() => setActiveCategory('commercial')}
@@ -351,7 +321,7 @@ export default function Home() {
                     : 'text-gray-400 hover:text-white'
                 }`}
               >
-                Офисы
+                {t('home.projectsSection.filterCommercial')}
               </button>
             </div>
           </div>
@@ -376,40 +346,40 @@ export default function Home() {
                     <Link href={`/projects/${project.id}`} className="relative h-[280px] sm:h-[320px] w-full overflow-hidden block">
                       <Image
                         src={project.heroImage}
-                        alt={project.name}
+                        alt={project.name[locale] || project.name.ru}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-750 ease-out"
                         referrerPolicy="no-referrer"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent opacity-90" />
-                      
+
                       <span className="absolute top-4 left-4 bg-black/75 backdrop-blur-sm border border-white/10 text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-sm">
-                        {project.statusLabel}
+                        {project.statusLabel[locale] || project.statusLabel.ru}
                       </span>
 
                       <span className="absolute bottom-4 left-4 text-xs font-light text-gray-300 flex items-center space-x-1">
                         <MapPin className="w-3.5 h-3.5 text-[#C4A47C]" />
-                        <span>{project.location}</span>
+                        <span>{project.location[locale] || project.location.ru}</span>
                       </span>
                     </Link>
 
                     <div className="p-6 sm:p-8 flex-grow flex flex-col justify-between space-y-4">
                       <div className="space-y-2">
                         <span className="text-[10px] tracking-widest font-mono text-gray-500 font-semibold uppercase">
-                          {project.typeLabel}
+                          {project.typeLabel[locale] || project.typeLabel.ru}
                         </span>
                         <h3 className="text-xl sm:text-2xl font-bold font-heading text-white tracking-tight uppercase group-hover:text-[#C4A47C] transition-colors">
-                          <Link href={`/projects/${project.id}`}>{project.name}</Link>
+                          <Link href={`/projects/${project.id}`}>{project.name[locale] || project.name.ru}</Link>
                         </h3>
                         <p className="text-gray-400 text-sm font-light leading-relaxed line-clamp-2">
-                          {project.description}
+                          {project.description[locale] || project.description.ru}
                         </p>
                       </div>
 
                       <div className="pt-4 border-t border-white/5 flex items-center justify-between">
                         <div className="text-xs space-y-0.5">
-                          <span className="text-gray-500 block">Основные параметры</span>
-                          <span className="text-gray-100 font-semibold">{project.specs[0]?.label}: {project.specs[0]?.value}</span>
+                          <span className="text-gray-500 block">{t('home.projectsSection.mainParams')}</span>
+                          <span className="text-gray-100 font-semibold">{project.specs[0]?.label[locale] || project.specs[0]?.label.ru}: {project.specs[0]?.value[locale] || project.specs[0]?.value.ru}</span>
                         </div>
                         <Link
                           href={`/projects/${project.id}`}
@@ -430,7 +400,7 @@ export default function Home() {
               href="/projects"
               className="inline-flex items-center space-x-2 bg-white/5 hover:bg-[#C4A47C] border border-white/10 hover:border-[#C4A47C] text-white hover:text-black px-6 py-3 text-xs uppercase tracking-widest font-semibold transition-all duration-300 rounded-sm cursor-pointer"
             >
-              <span>Смотреть абсолютно все объекты</span>
+              <span>{t('home.projectsSection.viewAll')}</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -445,12 +415,12 @@ export default function Home() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center max-w-3xl mx-auto space-y-3 mb-16"
         >
-          <span className="text-xs uppercase tracking-widest text-[#C4A47C] font-semibold">Наши догмы</span>
+          <span className="text-xs uppercase tracking-widest text-[#C4A47C] font-semibold">{t('home.advantages.eyebrow')}</span>
           <h2 className="text-3xl sm:text-4xl font-bold font-heading text-white uppercase tracking-tight">
-            Почему нам доверяют
+            {t('home.advantages.title')}
           </h2>
           <p className="text-gray-400 text-sm font-light">
-            Инвестиция в жилую или коммерческую недвижимость от EVRO PLAZA GROUP — это защита ваших интересов, долговечность и безупречный комфорт.
+            {t('home.advantages.subtitle')}
           </p>
         </motion.div>
 
@@ -503,22 +473,22 @@ export default function Home() {
               <div className="space-y-2">
                 <span className="text-xs uppercase tracking-widest text-[#C4A47C] font-semibold flex items-center space-x-2">
                   <span className="w-8 h-[1px] bg-[#C4A47C]" />
-                  <span>Стандарты качества</span>
+                  <span>{t('home.constructionQuality.eyebrow')}</span>
                 </span>
                 <h2 className="text-3xl sm:text-4xl font-bold font-heading text-white uppercase tracking-tight">
-                  Построено на века <br />— чтобы служить поколениям
+                  {t('home.constructionQuality.titleLine1')} <br />{t('home.constructionQuality.titleLine2')}
                 </h2>
                 <p className="text-gray-400 text-sm font-light leading-relaxed pt-2">
-                  Мы ставим бескомпромиссные инженерные стандарты приоритетом №1. Выбрав материалы европейских брендов и собственную систему экспертизы, мы минимизировали любые риски усадки и износа.
+                  {t('home.constructionQuality.paragraph')}
                 </p>
               </div>
 
               <div className="space-y-6">
                 {[
-                  { id: 'tech-1', num: '01', title: 'Монолитно-каркасная основа', desc: 'Свободная перепланировка помещений, повышенная жесткость конструкции.', border: true },
-                  { id: 'tech-2', num: '02', title: 'Премиальные дышащие фасады', desc: 'Терморегуляция и защита от перегрева летом за счет калиброванного керамогранита.', border: true },
-                  { id: 'tech-3', num: '03', title: 'Шумозащитные окна REHAU / Schüco', desc: 'Двухкамерный энергоэффективный стеклопакет не пропускает пыль и уличные звуки.', border: true },
-                  { id: 'tech-4', num: '04', title: 'Умные лифтовые шахты KONE', desc: 'Абсолютно бесшумные лифты со встроенными интеллектуальными серверами распределения.', border: false },
+                  { id: 'tech-1', num: '01', title: t('home.constructionQuality.items.0.title'), desc: t('home.constructionQuality.items.0.desc'), border: true },
+                  { id: 'tech-2', num: '02', title: t('home.constructionQuality.items.1.title'), desc: t('home.constructionQuality.items.1.desc'), border: true },
+                  { id: 'tech-3', num: '03', title: t('home.constructionQuality.items.2.title'), desc: t('home.constructionQuality.items.2.desc'), border: true },
+                  { id: 'tech-4', num: '04', title: t('home.constructionQuality.items.3.title'), desc: t('home.constructionQuality.items.3.desc'), border: false },
                 ].map((tech, index) => (
                   <motion.div
                     id={tech.id}
@@ -584,14 +554,14 @@ export default function Home() {
           <div className="space-y-2">
             <span className="text-xs uppercase tracking-widest text-[#C4A47C] font-semibold flex items-center space-x-2">
               <span className="w-8 h-[1px] bg-[#C4A47C]" />
-              <span>Эстетика пространств</span>
+              <span>{t('home.gallery.eyebrow')}</span>
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold font-heading text-white uppercase tracking-tight">
-              Галерея наших интерьеров
+              {t('home.gallery.title')}
             </h2>
           </div>
           <p className="text-gray-400 text-sm max-w-md font-light leading-relaxed mt-4 md:mt-0">
-            Взгляните на чистоту архитектурных решений, мраморные полы просторных лобби, уют ландшафтных двориков и панорамы вечерней застройки.
+            {t('home.gallery.subtitle')}
           </p>
         </motion.div>
 
@@ -635,13 +605,13 @@ export default function Home() {
             >
               <span className="text-xs uppercase tracking-widest text-[#C4A47C] font-semibold flex items-center space-x-2">
                 <span className="w-8 h-[1px] bg-[#C4A47C]" />
-                <span>Отзывы резидентов</span>
+                <span>{t('home.testimonials.eyebrow')}</span>
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold font-heading text-white uppercase tracking-tight">
-                Нам доверяют лучшие семьи страны
+                {t('home.testimonials.title')}
               </h2>
               <p className="text-gray-400 text-sm font-light leading-relaxed">
-                Чистые отзывы от владельцев, заселившихся в наши построенные комплексы и инвесторов, укрепивших свои капиталы.
+                {t('home.testimonials.subtitle')}
               </p>
 
               {/* Slider switch dots indicators */}

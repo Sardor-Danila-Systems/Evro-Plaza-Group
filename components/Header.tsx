@@ -4,13 +4,16 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Phone, Globe, ChevronRight } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useLanguage, Locale } from '@/lib/i18n/context';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [lang, setLang] = useState<'RU' | 'UZ' | 'EN'>('RU');
+  const { locale, setLocale } = useLanguage();
+  const { t } = useTranslation();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -34,14 +37,14 @@ export default function Header() {
   }, [pathname]);
 
   const navLinks = [
-    { href: '/', label: 'Главная' },
-    { href: '/about', label: 'О компании' },
-    { href: '/projects', label: 'Проекты' },
-    { href: '/contact', label: 'Контакты' },
+    { href: '/', label: t('nav.home') },
+    { href: '/about', label: t('nav.about') },
+    { href: '/projects', label: t('nav.projects') },
+    { href: '/contact', label: t('nav.contact') },
   ];
 
-  const toggleLang = (selected: 'RU' | 'UZ' | 'EN') => {
-    setLang(selected);
+  const toggleLang = (selected: Locale) => {
+    setLocale(selected);
   };
 
   return (
@@ -95,24 +98,24 @@ export default function Header() {
               <div id="language-toggle" className="flex items-center space-x-1.5 text-xs font-mono text-gray-400 bg-white/5 px-2.5 py-1.5 rounded border border-white/10">
                 <button
                   id="lang-ru"
-                  onClick={() => toggleLang('RU')}
-                  className={`hover:text-white transition-all cursor-pointer ${lang === 'RU' ? 'text-[#C4A47C] font-semibold' : ''}`}
+                  onClick={() => toggleLang('ru')}
+                  className={`hover:text-white transition-all cursor-pointer ${locale === 'ru' ? 'text-[#C4A47C] font-semibold' : ''}`}
                 >
                   RU
                 </button>
                 <span className="text-white/20">·</span>
                 <button
                   id="lang-uz"
-                  onClick={() => toggleLang('UZ')}
-                  className={`hover:text-white transition-all cursor-pointer ${lang === 'UZ' ? 'text-[#C4A47C] font-semibold' : ''}`}
+                  onClick={() => toggleLang('uz')}
+                  className={`hover:text-white transition-all cursor-pointer ${locale === 'uz' ? 'text-[#C4A47C] font-semibold' : ''}`}
                 >
                   UZ
                 </button>
                 <span className="text-white/20">·</span>
                 <button
                   id="lang-en"
-                  onClick={() => toggleLang('EN')}
-                  className={`hover:text-white transition-all cursor-pointer ${lang === 'EN' ? 'text-[#C4A47C] font-semibold' : ''}`}
+                  onClick={() => toggleLang('en')}
+                  className={`hover:text-white transition-all cursor-pointer ${locale === 'en' ? 'text-[#C4A47C] font-semibold' : ''}`}
                 >
                   EN
                 </button>
@@ -132,7 +135,7 @@ export default function Header() {
                 href="/contact"
                 className="bg-[#C4A47C] text-black px-5 py-2 text-xs uppercase tracking-widest font-semibold hover:bg-neutral-100 transition-all duration-300 rounded-sm"
               >
-                Связаться
+                {t('nav.contactCta')}
               </Link>
             </div>
 
@@ -201,22 +204,22 @@ export default function Header() {
             <div className="mt-auto space-y-6">
               <div className="flex justify-center space-x-3 text-xs font-mono text-gray-400 bg-white/5 py-2.5 rounded border border-white/10">
                 <button
-                  onClick={() => toggleLang('RU')}
-                  className={`px-3 hover:text-white ${lang === 'RU' ? 'text-[#C4A47C] font-semibold' : ''}`}
+                  onClick={() => toggleLang('ru')}
+                  className={`px-3 hover:text-white ${locale === 'ru' ? 'text-[#C4A47C] font-semibold' : ''}`}
                 >
                   RU
                 </button>
                 <span className="text-white/20">·</span>
                 <button
-                  onClick={() => toggleLang('UZ')}
-                  className={`px-3 hover:text-white ${lang === 'UZ' ? 'text-[#C4A47C] font-semibold' : ''}`}
+                  onClick={() => toggleLang('uz')}
+                  className={`px-3 hover:text-white ${locale === 'uz' ? 'text-[#C4A47C] font-semibold' : ''}`}
                 >
                   UZ
                 </button>
                 <span className="text-white/20">·</span>
                 <button
-                  onClick={() => toggleLang('EN')}
-                  className={`px-3 hover:text-white ${lang === 'EN' ? 'text-[#C4A47C] font-semibold' : ''}`}
+                  onClick={() => toggleLang('en')}
+                  className={`px-3 hover:text-white ${locale === 'en' ? 'text-[#C4A47C] font-semibold' : ''}`}
                 >
                   EN
                 </button>

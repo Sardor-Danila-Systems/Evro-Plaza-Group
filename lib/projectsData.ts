@@ -1,4 +1,340 @@
-export interface Project {
+export type LocalizedText = {
+  ru: string;
+  uz: string;
+  en: string;
+};
+
+export interface LocalizedProject {
+  id: string;
+  name: LocalizedText;
+  tagline: LocalizedText;
+  description: LocalizedText;
+  longDescription: LocalizedText;
+  status: 'completed' | 'construction' | 'sales' | 'upcoming';
+  statusLabel: LocalizedText;
+  type: 'residential' | 'commercial' | 'mixed' | 'villas';
+  typeLabel: LocalizedText;
+  location: LocalizedText;
+  city: string;
+  year: string;
+  heroImage: string;
+  gallery: string[];
+  specs: {
+    label: LocalizedText;
+    value: LocalizedText;
+  }[];
+  infrastructure: {
+    title: LocalizedText;
+    description: LocalizedText;
+    icon: string;
+  }[];
+  constructionProgress: {
+    stage: LocalizedText;
+    percentage: number;
+  }[];
+  plans: {
+    rooms: number;
+    area: string;
+    floor: string;
+    price: string;
+    image: string;
+  }[];
+}
+
+export const projectsData: LocalizedProject[] = [
+  {
+    id: 'avenue-plaza',
+    name: {
+      ru: 'Avenue Plaza',
+      uz: 'Avenue Plaza',
+      en: 'Avenue Plaza',
+    },
+    tagline: {
+      ru: 'Современный жилой комплекс премиум бизнес-класса в Самарканде',
+      uz: 'Samarqanddagi zamonaviy premium biznes toifali turar-joy majmuasi',
+      en: 'A modern premium business-class residential complex in Samarkand',
+    },
+    description: {
+      ru: 'Закрытый жилой комплекс премиум бизнес-класса на 14 корпусов с полной инфраструктурой: школа, детский сад, торговый центр, бассейны, фитнес-залы и более 500 паркинг-мест.',
+      uz: "14 binodan iborat, to'liq infratuzilmaga ega yopiq premium biznes toifali turar-joy majmuasi: maktab, bog'cha, savdo markazi, basseynlar, fitnes-zallar va 500 dan ortiq avtoturargoh joyi.",
+      en: 'A gated premium business-class residential complex of 14 buildings with full infrastructure: a school, kindergarten, shopping center, swimming pools, fitness centers, and over 500 parking spaces.',
+    },
+    longDescription: {
+      ru: 'Avenue Plaza — современный жилой комплекс премиум бизнес-класса, который строится в Самарканде на улице Умара Жура Кулова, за ЖК "Самарканд". Комплекс отличается элегантной архитектурой с кирпичными фасадами, высокими потолками от 3 метров и продуманной закрытой территорией, что делает его особенно привлекательным для семейной жизни. На территории комплекса будет своя школа, детский сад, большой магазин, фитнес-залы, бассейны, коворкинги — вся необходимая инфраструктура в пределах охраняемой территории. Расположение на окраине города обеспечивает тишину и спокойствие, в стороне от городского шума. Комплекс состоит из 14 корпусов, построенных по монолитно-кирпичной технологии. Сейчас активно ведется строительство 4, 5, 6, 7 и 8 блоков. Несмотря на то, что объект еще не сдан в эксплуатацию, большая часть квартир уже распродана. Доступна рассрочка.',
+      uz: 'Avenue Plaza — Samarqand shahrida, "Samarqand" turar-joy majmuasi orqasida, Umar Joʻrakulov koʻchasida qurilmoqda boʻlgan zamonaviy premium biznes toifali turar-joy majmuasi. Majmua gʻisht fasadli nafis arxitekturasi, 3 metrdan boshlanadigan baland shiftlari va oʻylab chiqilgan yopiq hududi bilan ajralib turadi, bu uni oilaviy hayot uchun ayniqsa jozibali qiladi. Majmua hududida oʻz maktabi, bogʻchasi, katta doʻkon, fitnes-zallar, basseynlar, kovorking maydonlari — barcha zarur infratuzilma qoʻriqlanadigan hudud doirasida boʻladi. Shahar chekkasida joylashganligi shahar shovqinidan uzoqda tinchlik va osoyishtalikni taʼminlaydi. Majmua monolit-gʻisht texnologiyasi boʻyicha qurilgan 14 binodan iborat. Hozirda 4, 5, 6, 7 va 8-bloklar qurilishi faol olib borilmoqda. Obyekt hali foydalanishga topshirilmagan boʻlsa-da, kvartiralarning katta qismi allaqachon sotilgan. Muddatli toʻlov mavjud.',
+      en: 'Avenue Plaza is a modern premium business-class residential complex under construction in Samarkand on Umar Jurakulov Street, behind the "Samarkand" residential complex. The complex stands out with its elegant architecture featuring brick façades, ceilings from 3 meters high, and a thoughtfully designed gated area, making it especially appealing for family living. The complex grounds will include its own school, kindergarten, a large store, fitness centers, swimming pools, and co-working spaces — all the necessary infrastructure within a secured territory. Its location on the outskirts of the city ensures quiet and tranquility, away from urban noise. The complex consists of 14 buildings built using monolithic-brick technology. Construction is currently actively underway on blocks 4, 5, 6, 7, and 8. Although the property has not yet been commissioned, most of the apartments have already been sold. Installment plans are available.',
+    },
+    status: 'construction',
+    statusLabel: {
+      ru: 'Строится (сдача в 2027 году)',
+      uz: 'Qurilmoqda (2027-yilda topshiriladi)',
+      en: 'Under construction (completion in 2027)',
+    },
+    type: 'mixed',
+    typeLabel: {
+      ru: 'Жилой комплекс премиум бизнес-класса',
+      uz: 'Premium biznes toifali turar-joy majmuasi',
+      en: 'Premium business-class residential complex',
+    },
+    location: {
+      ru: 'Самарканд, улица Умара Жура Кулова (за ЖК "Самарканд")',
+      uz: 'Samarqand, Umar Joʻrakulov koʻchasi ("Samarqand" turar-joy majmuasi orqasida)',
+      en: 'Samarkand, Umar Jurakulov Street (behind the "Samarkand" residential complex)',
+    },
+    city: 'Самарканд',
+    year: '2027',
+    heroImage: '/projects/avenue-plaza/gallery11.jpg',
+    gallery: [
+      '/projects/avenue-plaza/gallery.jpg',
+      '/projects/avenue-plaza/gallery1.jpg',
+      '/projects/avenue-plaza/gallery2.jpg',
+      '/projects/avenue-plaza/gallery3.jpg',
+      '/projects/avenue-plaza/gallery4.jpg',
+      '/projects/avenue-plaza/gallery5.jpg',
+      '/projects/avenue-plaza/gallery6.jpg',
+      '/projects/avenue-plaza/gallery7.jpg',
+      '/projects/avenue-plaza/gallery8.jpg',
+      '/projects/avenue-plaza/gallery9.jpg',
+      '/projects/avenue-plaza/gallery10.jpg',
+      '/projects/avenue-plaza/gallery11.jpg',
+      '/projects/avenue-plaza/gallery12.jpg'
+    ],
+    specs: [
+      {
+        label: { ru: 'Высота потолков', uz: 'Shift balandligi', en: 'Ceiling height' },
+        value: { ru: 'от 3 м', uz: '3 metrdan', en: 'from 3 m' },
+      },
+      {
+        label: { ru: 'Количество корпусов', uz: 'Binolar soni', en: 'Number of buildings' },
+        value: { ru: '14 зданий', uz: '14 ta bino', en: '14 buildings' },
+      },
+      {
+        label: { ru: 'Технология строительства', uz: 'Qurilish texnologiyasi', en: 'Construction technology' },
+        value: { ru: 'Монолит + кирпич', uz: 'Monolit + gʻisht', en: 'Monolithic + brick' },
+      },
+      {
+        label: { ru: 'Паркинг', uz: 'Avtoturargoh', en: 'Parking' },
+        value: { ru: 'Более 500 надземных и подземных мест', uz: "500 dan ortiq yer usti va yer osti joylari", en: 'Over 500 above- and below-ground spaces' },
+      },
+      {
+        label: { ru: 'Территория', uz: 'Hudud', en: 'Premises' },
+        value: { ru: 'Закрытая, охраняемая', uz: "Yopiq, qoʻriqlanadigan", en: 'Gated and guarded' },
+      },
+      {
+        label: { ru: 'Оплата', uz: "To'lov", en: 'Payment' },
+        value: { ru: 'Рассрочка доступна', uz: "Muddatli to'lov mavjud", en: 'Installment plans available' },
+      },
+    ],
+    infrastructure: [
+      {
+        title: { ru: 'Школа и детский сад', uz: "Maktab va bog'cha", en: 'School and kindergarten' },
+        description: {
+          ru: 'Собственная школа и детский сад на территории комплекса для удобства семей с детьми.',
+          uz: "Bolali oilalar uchun qulaylik yaratish maqsadida majmua hududida oʻz maktabi va bogʻchasi.",
+          en: 'An on-site school and kindergarten for the convenience of families with children.',
+        },
+        icon: 'School',
+      },
+      {
+        title: { ru: 'Торговый центр', uz: 'Savdo markazi', en: 'Shopping center' },
+        description: {
+          ru: 'Большой магазин и торговая инфраструктура в пределах закрытой территории комплекса.',
+          uz: "Majmuaning yopiq hududi doirasida katta doʻkon va savdo infratuzilmasi.",
+          en: 'A large store and retail infrastructure within the gated grounds of the complex.',
+        },
+        icon: 'ShoppingCart',
+      },
+      {
+        title: { ru: 'Бассейны и фитнес-залы', uz: 'Basseynlar va fitnes-zallar', en: 'Swimming pools and fitness centers' },
+        description: {
+          ru: 'Несколько бассейнов и фитнес-залов для жильцов всех возрастов.',
+          uz: "Har qanday yoshdagi aholi uchun bir nechta basseyn va fitnes-zallar.",
+          en: 'Several pools and fitness centers for residents of all ages.',
+        },
+        icon: 'Dumbbell',
+      },
+      {
+        title: { ru: 'Коворкинги', uz: 'Kovorking maydonlari', en: 'Co-working spaces' },
+        description: {
+          ru: 'Современные коворкинг-пространства для удаленной работы и встреч.',
+          uz: "Masofadan ishlash va uchrashuvlar uchun zamonaviy kovorking maydonlari.",
+          en: 'Modern co-working spaces for remote work and meetings.',
+        },
+        icon: 'Briefcase',
+      },
+      {
+        title: { ru: 'Охраняемая территория', uz: 'Qoʻriqlanadigan hudud', en: 'Guarded premises' },
+        description: {
+          ru: 'Закрытая, охраняемая территория с контролем доступа для безопасности жильцов.',
+          uz: "Aholi xavfsizligi uchun kirish nazorati bilan yopiq, qoʻriqlanadigan hudud.",
+          en: 'A gated, guarded area with access control for residents’ safety.',
+        },
+        icon: 'ShieldCheck',
+      },
+      {
+        title: { ru: 'Надземный и подземный паркинг', uz: 'Yer usti va yer osti avtoturargohi', en: 'Above- and below-ground parking' },
+        description: {
+          ru: 'Более 500 машиномест на надземных и подземных парковках комплекса.',
+          uz: "Majmuaning yer usti va yer osti avtoturargohlarida 500 dan ortiq avtomobil joyi.",
+          en: 'Over 500 parking spaces in the complex’s above- and below-ground parking areas.',
+        },
+        icon: 'Car',
+      },
+    ],
+    constructionProgress: [
+      { stage: { ru: 'Блоки 1-3', uz: '1-3-bloklar', en: 'Blocks 1-3' }, percentage: 100 },
+      { stage: { ru: 'Блок 4', uz: '4-blok', en: 'Block 4' }, percentage: 60 },
+      { stage: { ru: 'Блоки 5-6', uz: '5-6-bloklar', en: 'Blocks 5-6' }, percentage: 45 },
+      { stage: { ru: 'Блоки 7-8', uz: '7-8-bloklar', en: 'Blocks 7-8' }, percentage: 25 },
+    ],
+    plans: [],
+  },
+  {
+    id: 'evro-plaza-mall',
+    name: {
+      ru: 'EVRO PLAZA',
+      uz: 'EVRO PLAZA',
+      en: 'EVRO PLAZA',
+    },
+    tagline: {
+      ru: 'Действующий торговый центр в Самарканде',
+      uz: 'Samarqanddagi faoliyat yuritayotgan savdo markazi',
+      en: 'An operating shopping center in Samarkand',
+    },
+    description: {
+      ru: 'Торговый центр EVRO PLAZA, открытый в 2024 году: золото и ювелирные изделия, женская одежда, текстиль и стройматериалы — с дальнейшим расширением под фудкорт, кинозал и KFC.',
+      uz: '2024-yilda ochilgan EVRO PLAZA savdo markazi: oltin va zargarlik buyumlari, ayollar kiyimi, tekstil va qurilish materiallari — keyinchalik fudkort, kinoteatr va KFC bilan kengaytiriladi.',
+      en: 'EVRO PLAZA shopping center, opened in 2024: gold and jewelry, women’s clothing, textiles and building materials — with a planned expansion to add a food court, cinema and KFC.',
+    },
+    longDescription: {
+      ru: 'EVRO PLAZA — действующий торговый центр в Самарканде, построенный и открытый для посетителей в 2024 году. Сегодня здесь работают магазины золота и ювелирных изделий, бутики женской одежды, текстиля и стройматериалов. Архитектура центра выполнена в светлых тонах с восточными мотивами на фасаде, внутри — просторные галереи с фонтаном, мраморными полами и хрустальными люстрами. На территории центра уже работает развлекательная зона с боулингом и игровыми автоматами. В ближайших планах — расширение торгового центра с открытием большого фудкорта, кинозала и ресторана KFC.',
+      uz: 'EVRO PLAZA — Samarqand shahridagi faoliyat yuritayotgan savdo markazi, 2024-yilda qurilib, tashrif buyuruvchilar uchun ochilgan. Bugungi kunda bu yerda oltin va zargarlik buyumlari doʻkonlari, ayollar kiyimi, tekstil va qurilish materiallari butiklari ishlamoqda. Markaz arxitekturasi fasadda sharqona motivlar bilan yorqin ranglarda bezatilgan, ichkarida esa favvora, marmar pol va hristall lyustralar bilan keng galereyalar joylashgan. Markaz hududida allaqachon boulling va oʻyin avtomatlari bilan koʻngilochar zona ishlamoqda. Yaqin kelajak rejalarida — katta fudkort, kinoteatr va KFC restoranini ochish orqali savdo markazini kengaytirish bor.',
+      en: 'EVRO PLAZA is an operating shopping center in Samarkand, built and opened to visitors in 2024. Today it houses gold and jewelry stores, and boutiques selling women’s clothing, textiles, and building materials. The center’s architecture features light tones with oriental motifs on the façade, while inside, spacious galleries showcase a fountain, marble floors, and crystal chandeliers. An entertainment zone with bowling and arcade games is already operating on site. Upcoming plans include expanding the center with a large food court, a cinema, and a KFC restaurant.',
+    },
+    status: 'completed',
+    statusLabel: {
+      ru: 'Работает с 2024 года',
+      uz: '2024-yildan beri ishlaydi',
+      en: 'Operating since 2024',
+    },
+    type: 'commercial',
+    typeLabel: {
+      ru: 'Торговый центр',
+      uz: 'Savdo markazi',
+      en: 'Shopping center',
+    },
+    location: {
+      ru: 'Самарканд',
+      uz: 'Samarqand',
+      en: 'Samarkand',
+    },
+    city: 'Самарканд',
+    year: '2024',
+    heroImage: '/projects/evro_plaza/hero.jpg',
+    gallery: [
+      '/projects/evro_plaza/gallery-1.jpg',
+      '/projects/evro_plaza/gallery-2.jpg',
+      '/projects/evro_plaza/gallery-3.jpg',
+      '/projects/evro_plaza/gallery-4.jpg',
+      '/projects/evro_plaza/gallery-5.jpg',
+      '/projects/evro_plaza/gallery-6.jpg',
+      '/projects/evro_plaza/gallery-7.jpg',
+      '/projects/evro_plaza/gallery-8.jpg',
+      '/projects/evro_plaza/gallery-9.jpg',
+      '/projects/evro_plaza/gallery-10.jpg',
+    ],
+    specs: [
+      {
+        label: { ru: 'Год открытия', uz: 'Ochilgan yili', en: 'Opening year' },
+        value: { ru: '2024', uz: '2024', en: '2024' },
+      },
+      {
+        label: { ru: 'Расположение', uz: 'Joylashuvi', en: 'Location' },
+        value: { ru: 'Самарканд', uz: 'Samarqand', en: 'Samarkand' },
+      },
+      {
+        label: { ru: 'Якорные направления', uz: 'Asosiy yoʻnalishlar', en: 'Anchor categories' },
+        value: { ru: 'Золото и украшения, женская одежда, текстиль, стройматериалы', uz: 'Oltin va zargarlik buyumlari, ayollar kiyimi, tekstil, qurilish materiallari', en: 'Gold and jewelry, women’s clothing, textiles, building materials' },
+      },
+      {
+        label: { ru: 'Развлечения', uz: 'Koʻngilochar zona', en: 'Entertainment' },
+        value: { ru: 'Боулинг, игровые автоматы', uz: 'Boulling, oʻyin avtomatlari', en: 'Bowling, arcade games' },
+      },
+      {
+        label: { ru: 'Расширение', uz: 'Kengaytirish', en: 'Expansion' },
+        value: { ru: 'Скоро: фудкорт, кинозал, KFC', uz: 'Tez kunda: fudkort, kinoteatr, KFC', en: 'Coming soon: food court, cinema, KFC' },
+      },
+    ],
+    infrastructure: [
+      {
+        title: { ru: 'Золото и ювелирные изделия', uz: 'Oltin va zargarlik buyumlari', en: 'Gold and jewelry' },
+        description: {
+          ru: 'Бутики золотых и ювелирных изделий с премиальной отделкой торговых залов.',
+          uz: 'Savdo zallarining premium bezatilishi bilan oltin va zargarlik buyumlari butiklari.',
+          en: 'Gold and jewelry boutiques with premium fit-out of the retail halls.',
+        },
+        icon: 'Gem',
+      },
+      {
+        title: { ru: 'Женская одежда', uz: 'Ayollar kiyimi', en: 'Women’s clothing' },
+        description: {
+          ru: 'Магазины женской одежды и аксессуаров в светлых торговых галереях.',
+          uz: 'Yorug‘ savdo galereyalarida ayollar kiyimi va aksessuarlari doʻkonlari.',
+          en: 'Women’s clothing and accessories stores in bright retail galleries.',
+        },
+        icon: 'Shirt',
+      },
+      {
+        title: { ru: 'Текстиль и стройматериалы', uz: 'Tekstil va qurilish materiallari', en: 'Textiles and building materials' },
+        description: {
+          ru: 'Магазины тканей и текстиля, а также строительных материалов.',
+          uz: 'Mato va tekstil, shuningdek qurilish materiallari doʻkonlari.',
+          en: 'Fabric and textile stores, as well as building materials retailers.',
+        },
+        icon: 'ShoppingBag',
+      },
+      {
+        title: { ru: 'Боулинг и игровая зона', uz: 'Boulling va oʻyin zonasi', en: 'Bowling and arcade zone' },
+        description: {
+          ru: 'Развлекательная зона с боулинг-дорожками и игровыми автоматами.',
+          uz: 'Boulling yoʻlakchalari va oʻyin avtomatlari bilan koʻngilochar zona.',
+          en: 'An entertainment zone with bowling lanes and arcade machines.',
+        },
+        icon: 'Gamepad2',
+      },
+      {
+        title: { ru: 'Скоро: фудкорт и KFC', uz: 'Tez kunda: fudkort va KFC', en: 'Coming soon: food court and KFC' },
+        description: {
+          ru: 'Расширение торгового центра с большим фудкортом и рестораном KFC.',
+          uz: 'Katta fudkort va KFC restorani bilan savdo markazini kengaytirish.',
+          en: 'An expansion of the center with a large food court and a KFC restaurant.',
+        },
+        icon: 'UtensilsCrossed',
+      },
+      {
+        title: { ru: 'Скоро: кинозал', uz: 'Tez kunda: kinoteatr', en: 'Coming soon: cinema' },
+        description: {
+          ru: 'Открытие кинозала в рамках расширения торгового центра.',
+          uz: 'Savdo markazini kengaytirish doirasida kinoteatr ochilishi.',
+          en: 'A cinema opening as part of the shopping center’s expansion.',
+        },
+        icon: 'Film',
+      },
+    ],
+    constructionProgress: [
+      { stage: { ru: 'Основное здание ТЦ', uz: 'Savdo markazining asosiy binosi', en: 'Main mall building' }, percentage: 100 },
+    ],
+    plans: [],
+  }
+];
+
+// ---------------------------------------------------------------------------
+// Legacy archived data — kept verbatim for future reference. Not localized,
+// not used anywhere in the app today (confirmed: no imports of
+// `archivedProjectsData` outside this file). Do not localize or modify.
+// ---------------------------------------------------------------------------
+
+export interface LegacyProject {
   id: string;
   name: string;
   tagline: string;
@@ -35,64 +371,8 @@ export interface Project {
   }[];
 }
 
-export const projectsData: Project[] = [
-  {
-    id: 'avenue-plaza',
-    name: 'Avenue Plaza',
-    tagline: 'Современный жилой комплекс премиум бизнес-класса в Самарканде',
-    description: 'Закрытый жилой комплекс премиум бизнес-класса на 14 корпусов с полной инфраструктурой: школа, детский сад, торговый центр, бассейны, фитнес-залы и более 500 паркинг-мест.',
-    longDescription: 'Avenue Plaza — современный жилой комплекс премиум бизнес-класса, который строится в Самарканде на улице Умара Жура Кулова, за ЖК "Самарканд". Комплекс отличается элегантной архитектурой с кирпичными фасадами, высокими потолками от 3 метров и продуманной закрытой территорией, что делает его особенно привлекательным для семейной жизни. На территории комплекса будет своя школа, детский сад, большой магазин, фитнес-залы, бассейны, коворкинги — вся необходимая инфраструктура в пределах охраняемой территории. Расположение на окраине города обеспечивает тишину и спокойствие, в стороне от городского шума. Комплекс состоит из 14 корпусов, построенных по монолитно-кирпичной технологии. Сейчас активно ведется строительство 4, 5, 6, 7 и 8 блоков. Несмотря на то, что объект еще не сдан в эксплуатацию, большая часть квартир уже распродана. Доступна рассрочка.',
-    status: 'construction',
-    statusLabel: 'Строится (сдача в 2027 году)',
-    type: 'mixed',
-    typeLabel: 'Жилой комплекс премиум бизнес-класса',
-    location: 'Самарканд, улица Умара Жура Кулова (за ЖК "Самарканд")',
-    city: 'Самарканд',
-    year: '2027',
-    heroImage: '/projects/avenue-plaza/gallery11.jpg',
-    gallery: [
-      '/projects/avenue-plaza/gallery.jpg',
-      '/projects/avenue-plaza/gallery1.jpg',
-      '/projects/avenue-plaza/gallery2.jpg',
-      '/projects/avenue-plaza/gallery3.jpg',
-      '/projects/avenue-plaza/gallery4.jpg',
-      '/projects/avenue-plaza/gallery5.jpg',
-      '/projects/avenue-plaza/gallery6.jpg',
-      '/projects/avenue-plaza/gallery7.jpg',
-      '/projects/avenue-plaza/gallery8.jpg',
-      '/projects/avenue-plaza/gallery9.jpg',
-      '/projects/avenue-plaza/gallery10.jpg',
-      '/projects/avenue-plaza/gallery11.jpg',
-      '/projects/avenue-plaza/gallery12.jpg'
-    ],
-    specs: [
-      { label: 'Высота потолков', value: 'от 3 м' },
-      { label: 'Количество корпусов', value: '14 зданий' },
-      { label: 'Технология строительства', value: 'Монолит + кирпич' },
-      { label: 'Паркинг', value: 'Более 500 надземных и подземных мест' },
-      { label: 'Территория', value: 'Закрытая, охраняемая' },
-      { label: 'Оплата', value: 'Рассрочка доступна' }
-    ],
-    infrastructure: [
-      { title: 'Школа и детский сад', description: 'Собственная школа и детский сад на территории комплекса для удобства семей с детьми.', icon: 'School' },
-      { title: 'Торговый центр', description: 'Большой магазин и торговая инфраструктура в пределах закрытой территории комплекса.', icon: 'ShoppingCart' },
-      { title: 'Бассейны и фитнес-залы', description: 'Несколько бассейнов и фитнес-залов для жильцов всех возрастов.', icon: 'Dumbbell' },
-      { title: 'Коворкинги', description: 'Современные коворкинг-пространства для удаленной работы и встреч.', icon: 'Briefcase' },
-      { title: 'Охраняемая территория', description: 'Закрытая, охраняемая территория с контролем доступа для безопасности жильцов.', icon: 'ShieldCheck' },
-      { title: 'Надземный и подземный паркинг', description: 'Более 500 машиномест на надземных и подземных парковках комплекса.', icon: 'Car' }
-    ],
-    constructionProgress: [
-      { stage: 'Блоки 1-3', percentage: 100 },
-      { stage: 'Блок 4', percentage: 60 },
-      { stage: 'Блоки 5-6', percentage: 45 },
-      { stage: 'Блоки 7-8', percentage: 25 }
-    ],
-    plans: [],
-  }
-];
-
 // Временно скрытые проекты — вернуть в projectsData, когда появятся данные
-export const archivedProjectsData: Project[] = [
+export const archivedProjectsData: LegacyProject[] = [
   {
     id: 'evro-plaza-residence',
     name: 'EVRO PLAZA Residence',

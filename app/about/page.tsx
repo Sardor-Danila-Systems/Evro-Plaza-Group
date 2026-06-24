@@ -4,58 +4,29 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'motion/react';
 import { Award, Compass, Shield, Users, CheckCircle, ArrowRight, UserCheck, Landmark } from 'lucide-react';
+import { useTranslation } from '@/lib/i18n/useTranslation';
 
 export default function About() {
-  const values = [
-    {
-      icon: <Award className="w-6 h-6 text-[#C4A47C]" />,
-      title: 'Инженерное совершенство',
-      desc: 'Мы используем высшие сертифицированные конструкционные сплавы, монолитный каркас с демпферными сейсмоопорами и бетон класса М500. Контроль осуществляют независимые европейские лаборатории.',
-    },
-    {
-      icon: <Shield className="w-6 h-6 text-[#C4A47C]" />,
-      title: 'Безусловная честность',
-      desc: 'Предоставляем оригинальную кадастровую и регуляторную документацию в день первого обращения. Никаких юридических уловок или скрытых эксплуатационных надбавок.',
-    },
-    {
-      icon: <Compass className="w-6 h-6 text-[#C4A47C]" />,
-      title: 'Президентский сервис',
-      desc: 'Каждый житель получает полную подписку на услуги нашей премиальной консьерж-службы и клининг-инженеров PMG. Свежая выпечка в лобби, идеальные газоны и моментальный консьерж.',
-    },
-    {
-      icon: <Landmark className="w-6 h-6 text-[#C4A47C]" />,
-      title: 'Архитектурный патриотизм',
-      desc: 'Внедряем современные европейские тренды, но с уважением к богатому национальному наследию. Мы гармонично вплетаем узоры самаркандского травертина и ташкентского гранита в фасады.',
-    },
+  const { t } = useTranslation();
+
+  const valueIcons = [
+    <Award className="w-6 h-6 text-[#C4A47C]" />,
+    <Shield className="w-6 h-6 text-[#C4A47C]" />,
+    <Compass className="w-6 h-6 text-[#C4A47C]" />,
+    <Landmark className="w-6 h-6 text-[#C4A47C]" />,
   ];
 
-  const milestones = [
-    {
-      year: '2013',
-      title: 'Основание группы и первый прорыв',
-      desc: 'Регистрация бренда EVRO PLAZA в Ташкенте. Закладка фундамента первого клубного комплекса премиум-класса. Собрана команда архитекторов-диссидентов с европейским образованием.',
-    },
-    {
-      year: '2017',
-      title: 'Формирование собственного пула материалов',
-      desc: 'Запуск независимого логистического хаба для импорта долговечных отделочных материалов из Италии и Германии. С этого года все наши комплексы оснащаются окнами Schüco.',
-    },
-    {
-      year: '2020',
-      title: 'Объекты Deluxe и расширение географии',
-      desc: 'Загрузка портфолио знаковыми объектами в Самарканде. Сдача Riverside Residence. Компания впервые получает статус "Надежного федерального застройщика высшей лиги".',
-    },
-    {
-      year: '2024',
-      title: 'Управление недвижимостью уровня 5*',
-      desc: 'Создание дочернего оператора PMG Services для полноценного отельного сопровождения сданных комплексов. Большинство наших резидентов оценивают сервис на 9.9 из 10.',
-    },
-    {
-      year: '2026',
-      title: 'Взгляд в будущее и цифровое моделирование',
-      desc: 'Сегодня в стадии строительства находится 5 флагманских объектов суммарной площадью 320,000 квадратных метров, проектируемых по технологиям BIM BIM-моделирования.',
-    },
-  ];
+  const values = [0, 1, 2, 3].map((i) => ({
+    icon: valueIcons[i],
+    title: t(`about.values.items.${i}.title`),
+    desc: t(`about.values.items.${i}.desc`),
+  }));
+
+  const milestones = [0, 1, 2, 3, 4].map((i) => ({
+    year: t(`about.timeline.items.${i}.year`),
+    title: t(`about.timeline.items.${i}.title`),
+    desc: t(`about.timeline.items.${i}.desc`),
+  }));
 
   return (
     <div className="py-12">
@@ -73,12 +44,12 @@ export default function About() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
-          <span className="text-xs uppercase tracking-widest text-[#C4A47C] font-mono">О компании / EVRO PLAZA GROUP</span>
+          <span className="text-xs uppercase tracking-widest text-[#C4A47C] font-mono">{t('about.hero.eyebrow')}</span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-heading uppercase text-white tracking-tight">
-            История Совершенства
+            {t('about.hero.title')}
           </h1>
           <p className="text-gray-400 text-sm max-w-xl mx-auto font-light leading-relaxed">
-            Познакомьтесь с философией девелопера, строящего надежное будущее и развивающего эстетику городской среды в Узбекистане.
+            {t('about.hero.subtitle')}
           </p>
         </div>
       </section>
@@ -88,22 +59,22 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Founders word */}
           <div className="space-y-6 order-2 lg:order-1">
-            <span className="text-[#C4A47C] text-xs font-mono uppercase tracking-widest block">Обращение генерального директора</span>
+            <span className="text-[#C4A47C] text-xs font-mono uppercase tracking-widest block">{t('about.founder.eyebrow')}</span>
             <blockquote className="text-xl sm:text-2xl font-light italic text-gray-200 leading-snug font-sans">
-              «Мы не просто продаем прямоугольные бетонные коробки. Наша команда создает эстетические архитектурные ориентиры, которые останутся вашим наследникам через сотню лет. Качественный девелопмент — это искусство честности перед покупателем.»
+              {t('about.founder.quote')}
             </blockquote>
-            
+
             <div className="space-y-1">
-              <h4 className="text-white font-bold text-base">Рустам Эргашев</h4>
-              <p className="text-gray-400 text-xs font-light">Основатель, мажоритарный акционер EVRO PLAZA GROUP</p>
+              <h4 className="text-white font-bold text-base">{t('about.founder.name')}</h4>
+              <p className="text-gray-400 text-xs font-light">{t('about.founder.role')}</p>
             </div>
 
             <div className="pt-4 border-t border-white/5 space-y-4 text-gray-400 text-sm font-light leading-relaxed">
               <p>
-                Когда мы начинали в 2013 году, узбекский рынок недвижимости находился на этапе быстрого количественного наполнения. Архитектурная гармония часто приносилась в жертву экономии ресурсов. Мы решили сломать этот стереотип.
+                {t('about.founder.paragraph1')}
               </p>
               <p>
-                По сей день каждый сданный объект находится под контролем нашего гарантийного ведомства. Компания является замкнутым циклом: от исследований локаций, выкупа градостроительных долей, монолитного замеса до уборки газонов.
+                {t('about.founder.paragraph2')}
               </p>
             </div>
           </div>
@@ -121,7 +92,7 @@ export default function About() {
             <div className="absolute bottom-6 left-6 bg-black/90 border border-[#C4A47C]/30 p-4 rounded-sm">
               <div className="flex items-center space-x-3 text-xs tracking-wider">
                 <UserCheck className="w-5 h-5 text-[#C4A47C]" />
-                <span className="text-white font-mono font-medium">Кредо: Бескомпромиссная честность</span>
+                <span className="text-white font-mono font-medium">{t('about.founder.credo')}</span>
               </div>
             </div>
           </div>
@@ -132,10 +103,10 @@ export default function About() {
       <section className="py-24 bg-[#161619] border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto space-y-3 mb-16">
-            <span className="text-[#C4A47C] text-xs font-mono uppercase tracking-widest">Принципы компании</span>
-            <h2 className="text-3xl sm:text-4xl font-bold font-heading text-white uppercase tracking-tight">Наши Ценности</h2>
+            <span className="text-[#C4A47C] text-xs font-mono uppercase tracking-widest">{t('about.values.eyebrow')}</span>
+            <h2 className="text-3xl sm:text-4xl font-bold font-heading text-white uppercase tracking-tight">{t('about.values.title')}</h2>
             <p className="text-gray-400 text-xs sm:text-sm font-light leading-relaxed">
-              Эти четыре правила лежат в основе каждого кирпича, замеса и подписанного инвестиционного договора.
+              {t('about.values.subtitle')}
             </p>
           </div>
 
@@ -158,10 +129,10 @@ export default function About() {
       {/* ================= DETAILED CHRONOLOGICAL TIMELINE ================= */}
       <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto space-y-3 mb-20">
-          <span className="text-[#C4A47C] text-xs font-mono uppercase tracking-widest">Хронология великих побед</span>
-          <h2 className="text-3xl sm:text-4xl font-bold font-heading text-white uppercase tracking-tight">Путь к Вершине</h2>
+          <span className="text-[#C4A47C] text-xs font-mono uppercase tracking-widest">{t('about.timeline.eyebrow')}</span>
+          <h2 className="text-3xl sm:text-4xl font-bold font-heading text-white uppercase tracking-tight">{t('about.timeline.title')}</h2>
           <p className="text-gray-400 text-xs sm:text-sm font-light">
-            Как небольшой локальный девелоперский стартап вырос в признанный ориентир премиального рынка Узбекистана.
+            {t('about.timeline.subtitle')}
           </p>
         </div>
 
@@ -191,17 +162,17 @@ export default function About() {
         <div className="absolute inset-0 bg-cover bg-center opacity-10 pointer-events-none" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=1200&q=80')` }} />
         <div className="relative z-10 text-center space-y-6 max-w-3xl mx-auto">
           <h3 className="text-2xl sm:text-3xl font-bold font-heading text-white uppercase tracking-tight">
-            Ознакомьтесь с нашими текущими стройками
+            {t('about.cta.title')}
           </h3>
           <p className="text-gray-400 text-sm font-light max-w-xl mx-auto leading-relaxed">
-            Каждый наш проект уникален. Перейдите в каталог, чтобы сравнить характеристики, рассмотреть поэтажные карты и подобрать лучшее предложение.
+            {t('about.cta.subtitle')}
           </p>
           <div className="pt-4">
             <Link
               href="/projects"
               className="inline-flex items-center space-x-2 bg-[#C4A47C] text-black font-semibold uppercase px-8 py-4 text-xs tracking-wider hover:bg-neutral-100 transition-all rounded-sm cursor-pointer"
             >
-              <span>Посмотреть проекты</span>
+              <span>{t('about.cta.button')}</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
