@@ -114,14 +114,14 @@ const en: Dictionary = {
     gallery: {
       eyebrow: 'The Aesthetics of Space',
       title: 'Our Interiors Gallery',
-      subtitle: 'Take a look at the purity of our architectural solutions, the marble floors of spacious lobbies, the comfort of landscaped courtyards, and evening views of our developments.',
+      subtitle: 'Take a look at real photos of the Avenue Plaza courtyard and the EVRO PLAZA shopping mall.',
       images: [
-        'Patterned glazing',
-        'Premium living room',
-        'Marble lobby hall',
-        'Evening terrace aesthetics',
-        'Stylish villa façade',
-        'Architectural courtyard',
+        'Avenue Plaza entrance at night',
+        'Courtyard recreation area',
+        'Courtyard in the evening',
+        'Fountain and walking area',
+        'EVRO PLAZA mall from above',
+        'EVRO PLAZA jewelry boutique',
       ],
     },
     testimonials: {

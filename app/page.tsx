@@ -77,12 +77,12 @@ export default function Home() {
   }));
 
   const galleryImages = [
-    { src: '/gallery1.jpg', label: t('home.gallery.images.0') },
-    { src: '/gallery2.jpg', label: t('home.gallery.images.1') },
-    { src: '/gallery7.jpg', label: t('home.gallery.images.2') },
-    { src: '/gallery4.jpg', label: t('home.gallery.images.3') },
-    { src: '/gallery5.jpg', label: t('home.gallery.images.4') },
-    { src: '/gallery11.jpg', label: t('home.gallery.images.5') },
+    { src: '/projects/avenue-plaza/gallery5.jpg', label: t('home.gallery.images.0') },
+    { src: '/projects/avenue-plaza/gallery9.jpg', label: t('home.gallery.images.1') },
+    { src: '/projects/avenue-plaza/gallery6.jpg', label: t('home.gallery.images.2') },
+    { src: '/projects/avenue-plaza/gallery10.jpg', label: t('home.gallery.images.3') },
+    { src: '/projects/evro_plaza/gallery-1.jpg', label: t('home.gallery.images.4') },
+    { src: '/projects/evro_plaza/gallery-8.jpg', label: t('home.gallery.images.5') },
   ];
 
   const filteredProjects = activeCategory === 'all'
@@ -96,12 +96,11 @@ export default function Home() {
       <section id="homepage-hero" className="relative min-h-[95vh] flex flex-col overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1628744504163-f273b4d45598?auto=format&fit=crop&w=2000&q=90"
-            alt="Premium Architectural Exterior"
+            src="/projects/avenue-plaza/gallery11.jpg"
+            alt="Avenue Plaza — жилой комплекс в Самарканде"
             fill
             priority
             className="object-cover hero-ken-burns"
-            referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#121214] via-[#121214]/60 to-[#121214]/80" />
         </div>
@@ -202,8 +201,8 @@ export default function Home() {
             className="relative h-[480px] sm:h-[550px] w-full rounded-sm overflow-hidden group shadow-2xl border border-white/5"
           >
             <Image
-              src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80"
-              alt="Elite Real Estate Architecture details"
+              src="/projects/avenue-plaza/gallery8.jpg"
+              alt="Двор Avenue Plaza с фонтаном и зонами отдыха"
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out opacity-85"
             />
@@ -521,20 +520,18 @@ export default function Home() {
             >
               <div className="relative h-[380px] rounded-sm overflow-hidden border border-white/5">
                 <Image
-                  src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80"
-                  alt="Construction details"
+                  src="/projects/avenue-plaza/gallery2.jpg"
+                  alt="Дворовая территория Avenue Plaza с высоты"
                   fill
                   className="object-cover scale-zoom"
-                  referrerPolicy="no-referrer"
                 />
               </div>
               <div className="relative h-[380px] rounded-sm overflow-hidden border border-white/5 mt-8">
                 <Image
-                  src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=80"
-                  alt="Interior finish detail"
+                  src="/projects/evro_plaza/gallery-5.jpg"
+                  alt="Интерьер ТЦ EVRO PLAZA"
                   fill
                   className="object-cover scale-zoom"
-                  referrerPolicy="no-referrer"
                 />
               </div>
             </motion.div>

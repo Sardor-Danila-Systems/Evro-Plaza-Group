@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { Mail, Phone, MapPin, Space as Clock, ArrowUp, Send, Facebook, Instagram } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n/useTranslation';
@@ -19,9 +20,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-12 border-b border-white/5">
           {/* Logo & Brand description */}
           <div className="space-y-4">
-            <span className="font-sans text-2xl font-bold tracking-widest text-white flex items-center">
-              EVRO
-              <span className="text-[#C4A47C] font-light ml-1.5 border-l border-white/20 pl-2">PLAZA</span>
+            <span className="flex items-center space-x-2.5">
+              <span className="relative w-8 h-8 shrink-0">
+                <Image src="/brand/logo-icon.png" alt="Evro Plaza" fill className="object-contain" />
+              </span>
+              <span className="font-sans text-2xl font-bold tracking-widest text-white flex items-center">
+                EVRO
+                <span className="text-[#C4A47C] font-light ml-1.5 border-l border-white/20 pl-2">PLAZA</span>
+              </span>
             </span>
             <p className="text-gray-400 text-sm leading-relaxed antialiased">
               {t('footer.description')}

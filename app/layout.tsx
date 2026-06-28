@@ -20,17 +20,41 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'EVRO PLAZA GROUP — Премиальная недвижимость в Узбекистане',
-  description: 'EVRO PLAZA GROUP — девелопер премиальной жилой и коммерческой недвижимости в Узбекистане. Создаем новые архитектурные ориентиры будущего.',
-  keywords: 'EVRO PLAZA, Evro Plaza Group, элитное жилье, купить квартиру Ташкент, коммерческая недвижимость, премиум-класс, Tashkent City, девелопер',
+  metadataBase: new URL('https://evroplaza.uz'),
+  title: {
+    default: 'EVRO PLAZA GROUP — Недвижимость и торговые центры в Самарканде',
+    template: '%s | EVRO PLAZA GROUP',
+  },
+  description: 'EVRO PLAZA GROUP — девелопер жилой и коммерческой недвижимости в Самарканде. ЖК Avenue Plaza и торговый центр EVRO PLAZA.',
+  keywords: 'EVRO PLAZA, Avenue Plaza, недвижимость Самарканд, купить квартиру Самарканд, ЖК Самарканд, торговый центр Самарканд, девелопер',
+  authors: [{ name: 'EVRO PLAZA GROUP' }],
+  icons: {
+    icon: '/icon.png',
+    apple: '/apple-icon.png',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'ru_RU',
+    siteName: 'EVRO PLAZA GROUP',
+    title: 'EVRO PLAZA GROUP — Недвижимость и торговые центры в Самарканде',
+    description: 'Девелопер жилой и коммерческой недвижимости в Самарканде. ЖК Avenue Plaza и торговый центр EVRO PLAZA.',
+    images: ['/projects/avenue-plaza/gallery11.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'EVRO PLAZA GROUP — Недвижимость и торговые центры в Самарканде',
+    description: 'Девелопер жилой и коммерческой недвижимости в Самарканде. ЖК Avenue Plaza и торговый центр EVRO PLAZA.',
+    images: ['/projects/avenue-plaza/gallery11.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru" className={`${inter.variable} ${spaceGrotesk.variable} scroll-smooth`}>
-      <head>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏰</text></svg>" />
-      </head>
       <body className="bg-[#121214] text-gray-100 min-h-screen flex flex-col font-sans selection:bg-[#C4A47C]/30 selection:text-white overflow-x-hidden antialiased" suppressHydrationWarning>
         <LanguageProvider>
           <Header />

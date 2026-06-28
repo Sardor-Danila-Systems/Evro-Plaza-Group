@@ -12,7 +12,7 @@ import { useTranslation } from '@/lib/i18n/useTranslation';
 const branchData = {
   phones: ['+998 66 300-00-00'],
   email: 'info@evroplaza.uz',
-  mapImage: 'https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?auto=format&fit=crop&w=800&q=80',
+  mapImage: '/projects/avenue-plaza/gallery1.jpg',
 };
 
 export default function Contact() {

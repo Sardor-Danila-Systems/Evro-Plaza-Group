@@ -34,11 +34,10 @@ export default function About() {
       <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=80"
-            alt="Real estate board members building concept"
+            src="/projects/evro_plaza/hero.jpg"
+            alt="EVRO PLAZA GROUP"
             fill
             className="object-cover opacity-20"
-            referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#121214] via-[#121214]/60 to-[#121214]" />
         </div>
@@ -82,11 +81,10 @@ export default function About() {
           {/* Large elite photo portrait style representation */}
           <div className="relative h-[550px] rounded-sm overflow-hidden border border-white/10 shadow-2xl order-1 lg:order-2">
             <Image
-              src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80"
-              alt="CEO Rustam Ergashev Profile Portrait"
+              src="/projects/avenue-plaza/gallery12.jpg"
+              alt="Вход на территорию Avenue Plaza"
               fill
               className="object-cover opacity-90 brightness-95"
-              referrerPolicy="no-referrer"
             />
             {/* Embedded badge details */}
             <div className="absolute bottom-6 left-6 bg-black/90 border border-[#C4A47C]/30 p-4 rounded-sm">
@@ -159,7 +157,7 @@ export default function About() {
 
       {/* ================= CALL TO ACTION - VISIT PROJECTS ================= */}
       <section className="py-16 bg-gradient-to-r from-neutral-900 to-black/80 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 rounded-sm overflow-hidden relative shadow-xl border border-white/5">
-        <div className="absolute inset-0 bg-cover bg-center opacity-10 pointer-events-none" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=1200&q=80')` }} />
+        <div className="absolute inset-0 bg-cover bg-center opacity-10 pointer-events-none" style={{ backgroundImage: `url('/projects/evro_plaza/gallery-1.jpg')` }} />
         <div className="relative z-10 text-center space-y-6 max-w-3xl mx-auto">
           <h3 className="text-2xl sm:text-3xl font-bold font-heading text-white uppercase tracking-tight">
             {t('about.cta.title')}

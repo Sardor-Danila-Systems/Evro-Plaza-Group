@@ -2,6 +2,7 @@
 
 // Let's create components/Header.tsx
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Phone } from 'lucide-react';
@@ -60,7 +61,10 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Branding Logo */}
-            <Link href="/" className="flex items-center space-x-2 group">
+            <Link href="/" className="flex items-center space-x-2.5 group">
+              <span className="relative w-8 h-8 sm:w-9 sm:h-9 shrink-0">
+                <Image src="/brand/logo-icon.png" alt="Evro Plaza" fill className="object-contain" />
+              </span>
               <span className="font-sans text-xl sm:text-2xl font-bold tracking-widest text-white flex items-center">
                 EVRO
                 <span className="text-[#C4A47C] font-light ml-1.5 border-l border-white/20 pl-2">PLAZA</span>
@@ -123,11 +127,11 @@ export default function Header() {
 
               {/* Direct Call Center */}
               <a
-                href="tel:+998712000000"
+                href="tel:+998663000000"
                 className="flex items-center space-x-2 text-white/90 hover:text-[#C4A47C] transition-all text-sm font-semibold"
               >
                 <Phone className="w-4 h-4 text-[#C4A47C]" />
-                <span className="font-mono text-xs">+998 71 200-00-00</span>
+                <span className="font-mono text-xs">+998 66 300-00-00</span>
               </a>
 
               {/* Consultation Button */}
@@ -142,7 +146,7 @@ export default function Header() {
             {/* Mobile Actions Container (Burger & Language Toggle Mobile) */}
             <div className="flex md:hidden items-center space-x-4">
               <a
-                href="tel:+998712000000"
+                href="tel:+998663000000"
                 className="p-2 text-gray-300 hover:text-[#C4A47C] transition-colors"
                 aria-label="Call"
               >
@@ -226,8 +230,8 @@ export default function Header() {
               </div>
 
               <div className="text-center font-mono space-y-2 text-[#C4A47C] text-sm">
-                <a href="tel:+998712000000" className="block hover:underline">
-                  +998 71 200 00 00
+                <a href="tel:+998663000000" className="block hover:underline">
+                  +998 66 300 00 00
                 </a>
                 <span className="block text-gray-500 text-xs">info@evroplaza.uz</span>
               </div>

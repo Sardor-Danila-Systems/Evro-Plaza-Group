@@ -114,14 +114,14 @@ const uz: Dictionary = {
     gallery: {
       eyebrow: 'Makonlar estetikasi',
       title: 'Interyerlarimiz galeriyasi',
-      subtitle: "Arxitektura yechimlarining tozaligiga, keng lobbilarning marmar pollariga, landshaft hovlilarining qulayligiga va kechki qurilish panoramalariga nazar tashlang.",
+      subtitle: "Avenue Plaza hovli maydonchasi va EVRO PLAZA savdo markazining haqiqiy suratlariga nazar tashlang.",
       images: [
-        "Naqshli oynabandlar",
-        'Premium mehmonxona',
-        'Marmar lobbi-zal',
-        'Kechqurun terrasalar estetikasi',
-        'Villaning uslubiy fasadi',
-        'Arxitektura hovlisi',
+        "Avenue Plaza kechki kirish qismi",
+        'Dam olish zonasi bilan hovli',
+        'Kechki hovli maydoni',
+        'Favvora va sayr maydoni',
+        'EVRO PLAZA savdo markazi yuqoridan',
+        'EVRO PLAZA zargarlik butigi',
       ],
     },
     testimonials: {
