@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Loader from '@/components/Loader';
 import { LanguageProvider } from '@/lib/i18n/context';
 
 const inter = Inter({
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ru" className={`${inter.variable} ${spaceGrotesk.variable} scroll-smooth`}>
       <body className="bg-[#121214] text-gray-100 min-h-screen flex flex-col font-sans selection:bg-[#C4A47C]/30 selection:text-white overflow-x-hidden antialiased" suppressHydrationWarning>
         <LanguageProvider>
+          <Loader />
           <Header />
           <main className="flex-grow pt-20">
             {children}

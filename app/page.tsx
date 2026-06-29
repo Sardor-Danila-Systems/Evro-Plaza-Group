@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'motion/react';
+import ParallaxImage from '@/components/ParallaxImage';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -115,14 +116,15 @@ export default function Home() {
     <div className="relative min-h-screen">
       <div className="absolute inset-0 bg-grid-glow pointer-events-none" />
 
-      <section id="homepage-hero" className="relative min-h-[95vh] flex flex-col overflow-hidden">
+      <section id="homepage-hero" className="relative min-h-[100vh] sm:min-h-[95vh] flex flex-col overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <Image
+          <ParallaxImage
             src="/projects/avenue-plaza/gallery11.jpg"
             alt="Avenue Plaza — жилой комплекс в Самарканде"
-            fill
+            containerClassName="absolute inset-0 h-full w-full"
+            imageClassName="hero-ken-burns"
+            strength={50}
             priority
-            className="object-cover hero-ken-burns"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#121214] via-[#121214]/60 to-[#121214]/80" />
         </div>
@@ -213,20 +215,21 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="about-teaser" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <section id="about-teaser" className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="relative h-[480px] sm:h-[550px] w-full rounded-sm overflow-hidden group shadow-2xl border border-white/5"
+            className="relative h-[380px] sm:h-[480px] lg:h-[550px] w-full rounded-sm overflow-hidden group shadow-2xl border border-white/5"
           >
-            <Image
+            <ParallaxImage
               src="/projects/avenue-plaza/gallery8.jpg"
               alt="Двор Avenue Plaza с фонтаном и зонами отдыха"
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out opacity-85"
+              containerClassName="absolute inset-0 h-full w-full"
+              imageClassName="group-hover:scale-105 transition-transform duration-1000 ease-out opacity-85"
+              strength={30}
             />
             <div className="absolute bottom-6 left-6 right-6 bg-[#161619]/95 border border-white/10 p-6 rounded-sm flex items-center space-x-4 backdrop-blur-sm shadow-xl">
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#C4A47C] to-amber-700 flex items-center justify-center text-black font-semibold text-sm shadow-md">
@@ -300,23 +303,23 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="homepage-projects" className="py-24 bg-[#161619] border-y border-white/5 relative z-10">
+      <section id="homepage-projects" className="py-16 sm:py-24 bg-[#161619] border-y border-white/5 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12">
             <div className="space-y-2">
               <span className="text-xs uppercase tracking-widest text-[#C4A47C] font-semibold flex items-center space-x-2">
                 <span className="w-8 h-[1px] bg-[#C4A47C]" />
                 <span>{t('home.projectsSection.eyebrow')}</span>
               </span>
-              <h2 className="text-3xl sm:text-4xl font-bold font-heading text-white uppercase tracking-tight">
+              <h2 className="text-2xl sm:text-4xl font-bold font-heading text-white uppercase tracking-tight">
                 {t('home.projectsSection.title')}
               </h2>
             </div>
 
-            <div className="flex items-center space-x-1.5 mt-6 md:mt-0 bg-black/40 border border-white/5 p-1 rounded">
+            <div className="flex items-center space-x-1.5 mt-6 md:mt-0 bg-black/40 border border-white/5 p-1 rounded overflow-x-auto max-w-full">
               <button
                 onClick={() => setActiveCategory('all')}
-                className={`px-4 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-sm transition-all focus:outline-none cursor-pointer ${
+                className={`shrink-0 px-3 sm:px-4 py-1.5 text-[11px] sm:text-xs font-semibold tracking-wider uppercase rounded-sm transition-all focus:outline-none cursor-pointer ${
                   activeCategory === 'all'
                     ? 'bg-[#C4A47C] text-black'
                     : 'text-gray-400 hover:text-white'
@@ -326,7 +329,7 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setActiveCategory('residential')}
-                className={`px-4 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-sm transition-all focus:outline-none cursor-pointer ${
+                className={`shrink-0 px-3 sm:px-4 py-1.5 text-[11px] sm:text-xs font-semibold tracking-wider uppercase rounded-sm transition-all focus:outline-none cursor-pointer ${
                   activeCategory === 'residential'
                     ? 'bg-[#C4A47C] text-black'
                     : 'text-gray-400 hover:text-white'
@@ -336,7 +339,7 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setActiveCategory('commercial')}
-                className={`px-4 py-1.5 text-xs font-semibold tracking-wider uppercase rounded-sm transition-all focus:outline-none cursor-pointer ${
+                className={`shrink-0 px-3 sm:px-4 py-1.5 text-[11px] sm:text-xs font-semibold tracking-wider uppercase rounded-sm transition-all focus:outline-none cursor-pointer ${
                   activeCategory === 'commercial'
                     ? 'bg-[#C4A47C] text-black'
                     : 'text-gray-400 hover:text-white'
@@ -348,7 +351,7 @@ export default function Home() {
           </div>
 
           {/* Cards gallery Grid structure */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project, index) => {
                 const isFeatured = index === 0;
@@ -428,7 +431,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="advantages" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="advantages" className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -445,7 +448,7 @@ export default function Home() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {benefits.map((benefit, index) => (
             <motion.div
               key={benefit.idx}
@@ -480,9 +483,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="construction-quality" className="py-24 bg-[#161619] border-t border-white/5 relative z-10">
+      <section id="construction-quality" className="py-16 sm:py-24 bg-[#161619] border-t border-white/5 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             {/* Visual Specs details and descriptors */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
@@ -538,22 +541,24 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="grid grid-cols-2 gap-4"
+              className="grid grid-cols-2 gap-3 sm:gap-4"
             >
-              <div className="relative h-[380px] rounded-sm overflow-hidden border border-white/5">
-                <Image
+              <div className="relative h-[220px] sm:h-[300px] lg:h-[380px] rounded-sm overflow-hidden border border-white/5">
+                <ParallaxImage
                   src="/projects/avenue-plaza/gallery2.jpg"
                   alt="Дворовая территория Avenue Plaza с высоты"
-                  fill
-                  className="object-cover scale-zoom"
+                  containerClassName="absolute inset-0 h-full w-full"
+                  imageClassName="scale-zoom"
+                  strength={25}
                 />
               </div>
-              <div className="relative h-[380px] rounded-sm overflow-hidden border border-white/5 mt-8">
-                <Image
+              <div className="relative h-[220px] sm:h-[300px] lg:h-[380px] rounded-sm overflow-hidden border border-white/5 mt-6 sm:mt-8">
+                <ParallaxImage
                   src="/projects/evro_plaza/gallery-5.jpg"
                   alt="Интерьер ТЦ EVRO PLAZA"
-                  fill
-                  className="object-cover scale-zoom"
+                  containerClassName="absolute inset-0 h-full w-full"
+                  imageClassName="scale-zoom"
+                  strength={25}
                 />
               </div>
             </motion.div>
@@ -562,7 +567,7 @@ export default function Home() {
       </section>
 
       {/* ================= DESIGN MASONRY GALLERY SECTION ================= */}
-      <section id="gallery-masonry" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="gallery-masonry" className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -669,7 +674,7 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      <section id="testimonials" className="py-24 bg-[#161619] border-t border-white/5 relative z-10">
+      <section id="testimonials" className="py-16 sm:py-24 bg-[#161619] border-t border-white/5 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
             {/* Left intro details layout */}

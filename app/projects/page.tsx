@@ -58,7 +58,7 @@ function ProjectsListContent() {
   return (
     <div className="space-y-12">
       {/* ================= FILTER PANEL INTERACTIVE CONTROLS ================= */}
-      <section className="bg-white/[0.02] border border-white/5 p-6 rounded-sm space-y-6">
+      <section className="bg-white/[0.02] border border-white/5 p-4 sm:p-6 rounded-sm space-y-5 sm:space-y-6">
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-6">
           
           {/* Live Searchbar Input */}
@@ -144,17 +144,19 @@ function ProjectsListContent() {
 
       {/* ================= PRODUCTS CARDS LIST GRID ================= */}
       {filteredProjects.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10">
           {filteredProjects.map((project, index) => (
             <motion.article
               key={project.id}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -4 }}
               className="bg-white/[0.01] border border-white/5 rounded-sm overflow-hidden flex flex-col hover:border-[#C4A47C]/45 transition-all group"
             >
               {/* Card visual rendering */}
-              <div className="relative h-[300px] w-full overflow-hidden">
+              <div className="relative h-[220px] sm:h-[300px] w-full overflow-hidden">
                 <Image
                   src={project.heroImage}
                   alt={project.name[locale] || project.name.ru}
@@ -181,7 +183,7 @@ function ProjectsListContent() {
               </div>
 
               {/* Card Meta Content details info body */}
-              <div className="p-8 flex-grow flex flex-col justify-between space-y-6">
+              <div className="p-6 sm:p-8 flex-grow flex flex-col justify-between space-y-5 sm:space-y-6">
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] uppercase tracking-widest font-mono text-[#C4A47C]">
@@ -241,9 +243,9 @@ function ProjectsListContent() {
 export default function Projects() {
   const { t } = useTranslation();
   return (
-    <div className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <div className="py-8 sm:py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
       {/* ================= HEADER SECTION ================= */}
-      <section className="text-center space-y-4 max-w-3xl mx-auto pt-8">
+      <section className="text-center space-y-4 max-w-3xl mx-auto pt-4 sm:pt-8">
         <span className="text-xs uppercase tracking-widest text-[#C4A47C] font-mono">{t('projects.list.eyebrow')}</span>
         <h1 className="text-3xl sm:text-5xl font-bold font-heading uppercase text-white tracking-tight">{t('projects.list.title')}</h1>
         <p className="text-gray-400 text-sm font-light leading-relaxed">

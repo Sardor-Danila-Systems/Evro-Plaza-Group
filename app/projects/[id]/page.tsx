@@ -39,6 +39,7 @@ import {
 } from 'lucide-react';
 import { projectsData } from '@/lib/projectsData';
 import { useTranslation } from '@/lib/i18n/useTranslation';
+import ParallaxImage from '@/components/ParallaxImage';
 
 // Generate safe dynamic icons referencing infrastructure names
 const getInfraIcon = (iconName: string) => {
@@ -146,21 +147,26 @@ export default function SingleProjectPage({ params }: { params: Promise<{ id: st
   return (
     <div className="pb-24">
       {/* ================= HERO SECTION ================= */}
-      <section className="relative h-[65vh] sm:h-[80vh] flex items-end overflow-hidden pb-12 sm:pb-20">
+      <section className="relative h-[60vh] sm:h-[80vh] flex items-end overflow-hidden pb-10 sm:pb-20">
         <div className="absolute inset-0 z-0">
-          <Image
+          <ParallaxImage
             src={project.heroImage}
             alt={project.name[locale] || project.name.ru}
-            fill
+            containerClassName="absolute inset-0 h-full w-full"
+            imageClassName="opacity-40"
+            strength={45}
             priority
-            className="object-cover scale-100 opacity-40"
-            referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#121214] via-[#121214]/40 to-[#121214]/85" />
         </div>
 
         {/* Back Link and Header detail */}
-        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10 space-y-5 sm:space-y-6"
+        >
           <Link
             href="/projects"
             className="inline-flex items-center space-x-2 text-gray-400 hover:text-[#C4A47C] text-xs uppercase tracking-wider font-semibold transition-colors bg-white/5 px-4 py-2 rounded-sm border border-white/5"
@@ -173,18 +179,18 @@ export default function SingleProjectPage({ params }: { params: Promise<{ id: st
             <span className="text-[10px] sm:text-xs uppercase tracking-widest text-[#C4A47C] font-mono font-semibold bg-white/5 px-3 py-1 rounded">
               {project.typeLabel[locale] || project.typeLabel.ru}
             </span>
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold font-heading uppercase text-white tracking-tight">
+            <h1 className="text-2xl sm:text-5xl lg:text-6xl font-bold font-heading uppercase text-white tracking-tight">
               {project.name[locale] || project.name.ru}
             </h1>
             <p className="text-gray-300 text-sm sm:text-lg max-w-3xl font-light leading-relaxed antialiased">
               {project.tagline[locale] || project.tagline.ru}
             </p>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* ================= PROJECT OVERVIEW & SPECIFICATIONS ================= */}
-      <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-16">
+      <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-16">
         {/* Descriptors */}
         <div className="lg:col-span-2 space-y-6">
           <div className="space-y-2">
@@ -207,9 +213,16 @@ export default function SingleProjectPage({ params }: { params: Promise<{ id: st
           {/* Infrastructure Feature cards panel */}
           <div className="pt-8 space-y-6">
             <h3 className="text-white font-sans text-base font-bold uppercase tracking-tight">{t('projects.detail.infrastructureTitle')}</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {project.infrastructure.map((infra, idx) => (
-                <div key={idx} className="bg-white/[0.01] border border-white/5 p-5 rounded-sm flex items-start space-x-4">
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.5, delay: (idx % 2) * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  className="bg-white/[0.01] border border-white/5 p-5 rounded-sm flex items-start space-x-4"
+                >
                   <div className="p-2.5 bg-white/5 border border-white/10 rounded-sm shrink-0">
                     {getInfraIcon(infra.icon)}
                   </div>
@@ -217,7 +230,7 @@ export default function SingleProjectPage({ params }: { params: Promise<{ id: st
                     <h4 className="text-white font-semibold text-sm">{infra.title[locale] || infra.title.ru}</h4>
                     <p className="text-gray-400 text-xs font-light leading-relaxed">{infra.description[locale] || infra.description.ru}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -260,19 +273,23 @@ export default function SingleProjectPage({ params }: { params: Promise<{ id: st
       </section>
 
       {/* ================= HIGH FIDELITY PROJECT GALLERY ================= */}
-      <section className="py-16 bg-[#161619] border-y border-white/5 relative z-10">
+      <section className="py-12 sm:py-16 bg-[#161619] border-y border-white/5 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="space-y-2">
             <span className="text-xs uppercase tracking-widest text-[#C4A47C] font-semibold">{t('projects.detail.galleryEyebrow')}</span>
             <h2 className="text-2xl sm:text-3xl font-bold font-heading text-white uppercase tracking-tight">{t('projects.detail.galleryTitle')}</h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {project.gallery.map((img, i) => (
-              <div
+              <motion.div
                 key={i}
+                initial={{ opacity: 0, y: 24, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.5, delay: (i % 4) * 0.08, ease: [0.16, 1, 0.3, 1] }}
                 onClick={() => setLightboxIndex(i)}
-                className="relative h-[200px] sm:h-[240px] rounded-sm overflow-hidden border border-white/5 group cursor-pointer"
+                className="relative h-[150px] sm:h-[240px] rounded-sm overflow-hidden border border-white/5 group cursor-pointer"
               >
                 <Image
                   src={img}
@@ -284,14 +301,14 @@ export default function SingleProjectPage({ params }: { params: Promise<{ id: st
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <Maximize2 className="w-6 h-6 text-white" />
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* ================= CONSTRUCTION PROGRESS INDICATOR BLOCK ================= */}
-      <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
         <div className="space-y-2">
           <span className="text-xs uppercase tracking-widest text-[#C4A47C] font-semibold flex items-center space-x-2">
             <Hammer className="w-4 h-4" />
@@ -302,7 +319,7 @@ export default function SingleProjectPage({ params }: { params: Promise<{ id: st
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-[#161619]/60 border border-white/5 p-8 rounded-sm">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center bg-[#161619]/60 border border-white/5 p-5 sm:p-8 rounded-sm">
           {/* Progress Rows bars */}
           <div className="space-y-6">
             {project.constructionProgress.map((state, index) => (
@@ -340,7 +357,7 @@ export default function SingleProjectPage({ params }: { params: Promise<{ id: st
       </section>
 
       {/* ================= INTERACTIVE LAYOUT SELECTOR FLOOR PLAN PLANNER ================= */}
-      <section className="py-16 bg-[#161619] border-t border-white/5 relative z-10">
+      <section className="py-12 sm:py-16 bg-[#161619] border-t border-white/5 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <span className="text-[#C4A47C] text-xs font-mono uppercase tracking-widest">{t('projects.detail.configuratorEyebrow')}</span>
@@ -350,7 +367,7 @@ export default function SingleProjectPage({ params }: { params: Promise<{ id: st
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* List selector column buttons */}
             <div className="lg:col-span-4 space-y-4">
               {project.plans.map((p, idx) => (
@@ -383,7 +400,7 @@ export default function SingleProjectPage({ params }: { params: Promise<{ id: st
                 {t('projects.detail.schematicPlan')}
               </div>
 
-              <div className="relative w-64 h-64 opacity-80 border-2 border-dashed border-white/10 rounded flex items-center justify-center p-4">
+              <div className="relative w-48 h-48 sm:w-64 sm:h-64 opacity-80 border-2 border-dashed border-white/10 rounded flex items-center justify-center p-4">
                 {/* Simulated luxury floor blueprints structure */}
                 <Image
                   src={project.plans[activePlanIdx]?.image || project.heroImage}

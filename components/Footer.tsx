@@ -12,12 +12,12 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#121214] text-gray-300 pt-16 pb-8 border-t border-white/5 relative z-10">
+    <footer className="bg-[#121214] text-gray-300 pt-12 sm:pt-16 pb-8 border-t border-white/5 relative z-10">
       {/* Decorative architectural grid element lines */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/[0.01] via-transparent to-transparent pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-12 border-b border-white/5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 pb-10 sm:pb-12 border-b border-white/5">
           {/* Logo & Brand description */}
           <div className="space-y-4">
             <span className="flex items-center space-x-2.5">
