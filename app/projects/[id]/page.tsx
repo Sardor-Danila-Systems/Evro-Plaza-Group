@@ -12,6 +12,8 @@ import {
   Building,
   ExternalLink,
   ChevronRight,
+  ChevronLeft,
+  X,
   TrendingUp,
   Sparkles,
   Layers,
@@ -96,7 +98,30 @@ export default function SingleProjectPage({ params }: { params: Promise<{ id: st
   const [activePlanIdx, setActivePlanIdx] = useState(0);
 
   // Interactive full-screen gallery lightbox states
-  const [lightboxImg, setLightboxImg] = useState<string | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const galleryLength = project?.gallery.length ?? 0;
+
+  const showNext = () => {
+    if (galleryLength === 0) return;
+    setLightboxIndex((prev) => (prev === null ? null : (prev + 1) % galleryLength));
+  };
+
+  const showPrev = () => {
+    if (galleryLength === 0) return;
+    setLightboxIndex((prev) => (prev === null ? null : (prev - 1 + galleryLength) % galleryLength));
+  };
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') showNext();
+      else if (e.key === 'ArrowLeft') showPrev();
+      else if (e.key === 'Escape') setLightboxIndex(null);
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [lightboxIndex, galleryLength]);
 
   // If project is not found, render a premium 404 state
   if (!project) {
@@ -246,7 +271,7 @@ export default function SingleProjectPage({ params }: { params: Promise<{ id: st
             {project.gallery.map((img, i) => (
               <div
                 key={i}
-                onClick={() => setLightboxImg(img)}
+                onClick={() => setLightboxIndex(i)}
                 className="relative h-[200px] sm:h-[240px] rounded-sm overflow-hidden border border-white/5 group cursor-pointer"
               >
                 <Image
@@ -398,23 +423,58 @@ export default function SingleProjectPage({ params }: { params: Promise<{ id: st
 
       {/* ================= LIGHTBOX OVERLAY COMPONENT ================= */}
       <AnimatePresence>
-        {lightboxImg && (
+        {lightboxIndex !== null && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setLightboxImg(null)}
+            onClick={() => setLightboxIndex(null)}
             className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 cursor-zoom-out"
           >
-            <div className="relative max-w-5xl max-h-[85vh] w-full h-full">
+            <button
+              onClick={(e) => { e.stopPropagation(); setLightboxIndex(null); }}
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition-all cursor-pointer"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <button
+              onClick={(e) => { e.stopPropagation(); showPrev(); }}
+              className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition-all cursor-pointer"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            <button
+              onClick={(e) => { e.stopPropagation(); showNext(); }}
+              className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition-all cursor-pointer"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
+            <span className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-10 bg-white/10 border border-white/10 rounded-full px-3 py-1 text-xs text-white font-mono">
+              {lightboxIndex + 1} / {galleryLength}
+            </span>
+
+            <motion.div
+              key={lightboxIndex}
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-5xl max-h-[85vh] w-full h-full cursor-default"
+            >
               <Image
-                src={lightboxImg}
-                alt="High resolution render zoom view"
+                src={project.gallery[lightboxIndex]}
+                alt={`Gallery image ${lightboxIndex + 1}`}
                 fill
                 className="object-contain"
                 referrerPolicy="no-referrer"
               />
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

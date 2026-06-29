@@ -11,6 +11,8 @@ import {
   MapPin,
   CheckCircle,
   ChevronRight,
+  ChevronLeft,
+  X,
   Star
 } from 'lucide-react';
 import { projectsData } from '@/lib/projectsData';
@@ -21,6 +23,7 @@ export default function Home() {
   const [stats, setStats] = useState({ years: 0, projects: 0, families: 0, area: 0 });
   const [activeTesti, setActiveTesti] = useState(0);
   const [activeCategory, setActiveCategory] = useState<'all' | 'residential' | 'commercial'>('all');
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const duration = 2000;
@@ -88,6 +91,25 @@ export default function Home() {
   const filteredProjects = activeCategory === 'all'
     ? projectsData
     : projectsData.filter(p => p.type === activeCategory);
+
+  const showNextImage = () => {
+    setLightboxIndex((prev) => (prev === null ? null : (prev + 1) % galleryImages.length));
+  };
+
+  const showPrevImage = () => {
+    setLightboxIndex((prev) => (prev === null ? null : (prev - 1 + galleryImages.length) % galleryImages.length));
+  };
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') showNextImage();
+      else if (e.key === 'ArrowLeft') showPrevImage();
+      else if (e.key === 'Escape') setLightboxIndex(null);
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [lightboxIndex]);
 
   return (
     <div className="relative min-h-screen">
@@ -571,7 +593,8 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.6, delay: (i % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="relative h-[250px] sm:h-[300px] overflow-hidden group rounded-sm border border-white/5"
+              onClick={() => setLightboxIndex(i)}
+              className="relative h-[250px] sm:h-[300px] overflow-hidden group rounded-sm border border-white/5 cursor-pointer"
             >
               <Image
                 src={img.src}
@@ -588,6 +611,63 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* ================= GALLERY LIGHTBOX OVERLAY ================= */}
+      <AnimatePresence>
+        {lightboxIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setLightboxIndex(null)}
+            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 cursor-zoom-out"
+          >
+            <button
+              onClick={(e) => { e.stopPropagation(); setLightboxIndex(null); }}
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition-all cursor-pointer"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <button
+              onClick={(e) => { e.stopPropagation(); showPrevImage(); }}
+              className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition-all cursor-pointer"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            <button
+              onClick={(e) => { e.stopPropagation(); showNextImage(); }}
+              className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition-all cursor-pointer"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
+            <span className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-10 bg-white/10 border border-white/10 rounded-full px-3 py-1 text-xs text-white font-mono">
+              {lightboxIndex + 1} / {galleryImages.length}
+            </span>
+
+            <motion.div
+              key={lightboxIndex}
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-5xl max-h-[85vh] w-full h-full cursor-default"
+            >
+              <Image
+                src={galleryImages[lightboxIndex].src}
+                alt={galleryImages[lightboxIndex].label}
+                fill
+                className="object-contain"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <section id="testimonials" className="py-24 bg-[#161619] border-t border-white/5 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
