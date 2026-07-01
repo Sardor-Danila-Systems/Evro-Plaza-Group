@@ -2,14 +2,11 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Mail, Phone, MapPin, Space as Clock, ArrowUp, Send, Facebook, Instagram } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Facebook, Instagram } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n/useTranslation';
 
 export default function Footer() {
   const { t } = useTranslation();
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   return (
     <footer className="bg-[#121214] text-gray-300 pt-12 sm:pt-16 pb-8 border-t border-white/5 relative z-10">
@@ -99,8 +96,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/projects?type=villas" className="hover:text-[#C4A47C] transition-colors">
-                  {t('footer.propertyVillas')}
+                <Link href="/projects/avenue-plaza" className="hover:text-[#C4A47C] transition-colors">
+                  {t('footer.propertyAvenue')}
                 </Link>
               </li>
               <li>
@@ -121,8 +118,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-[#C4A47C] shrink-0" />
-                <a href="tel:+998663000000" className="hover:text-white transition-colors font-mono">
-                  +998 66 300-00-00
+                <a href="tel:+998880000010" className="hover:text-white transition-colors font-mono">
+                  +998 88 000-00-10
                 </a>
               </li>
               <li className="flex items-center space-x-3">
@@ -149,13 +146,10 @@ export default function Footer() {
               {t('footer.termsOfUse')}
             </a>
           </div>
-          <button
-            onClick={scrollToTop}
-            className="mt-4 md:mt-0 bg-white/5 hover:bg-white/10 hover:text-[#C4A47C] border border-white/10 p-2.5 rounded transition-all cursor-pointer flex items-center justify-center"
-            title={t('footer.backToTop')}
-          >
-            <ArrowUp className="w-4 h-4" />
-          </button>
+          <span className="mt-4 md:mt-0 flex items-center space-x-1.5 text-gray-500">
+            <span>{t('footer.madeBy')}</span>
+            <span className="text-[#C4A47C] font-mono font-semibold tracking-widest">SDS</span>
+          </span>
         </div>
       </div>
     </footer>

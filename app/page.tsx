@@ -49,29 +49,24 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
-  const testimonials = [
-    {
-      text: '«Качество отделки и сервис в EVRO PLAZA Residence превзошли наши ожидания. Это новый уровень жилья в Ташкенте. Продумано до мелочей: от бесшумных лифтов до ландшафтного сада вне доступа автотранспорта.»',
-      author: 'Дильшод Рахимов',
-      role: 'Резидент EVRO PLAZA Residence',
-      initials: 'ДР',
-      rating: 5,
-    },
-    {
-      text: '«Прозрачная сделка, четкие договоры и внимание к деталям на каждом этапе. Как инвестор, я рекомендую EVRO PLAZA GROUP без грамма сомнений. Ликвидность объекта выросла на 35% с момента заливки фундамента.»',
-      author: 'Карина Юсупова',
-      role: 'Инвестор, ресторатор',
-      initials: 'КЮ',
-      rating: 5,
-    },
-    {
-      text: '«Локация, архитектурные решения и управляющая компания — все на уровне ведущих девелоперов мирового класса. Каждое утро радует вид из панорамного остекления. Обслуживание работает безукоризненно.»',
-      author: 'Тимур Алиев',
-      role: 'Владелец технологического холдинга',
-      initials: 'ТА',
-      rating: 5,
-    },
-  ];
+  const testimonials = [0, 1, 2].map((i) => ({
+    text: t(`home.testimonials.items.${i}.text`),
+    author: t(`home.testimonials.items.${i}.author`),
+    role: t(`home.testimonials.items.${i}.role`),
+    initials: t(`home.testimonials.items.${i}.initials`),
+    rating: 5,
+  }));
+
+  const nextTesti = () => setActiveTesti((prev) => (prev + 1) % testimonials.length);
+  const prevTesti = () => setActiveTesti((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+
+  // Auto-advance the testimonials slider; restarts whenever the active slide changes
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setActiveTesti((prev) => (prev + 1) % 3);
+    }, 7000);
+    return () => clearTimeout(timer);
+  }, [activeTesti]);
 
   const benefits = [0, 1, 2, 3, 4, 5].map((i) => ({
     idx: String(i + 1).padStart(2, '0'),
@@ -696,23 +691,41 @@ export default function Home() {
                 {t('home.testimonials.subtitle')}
               </p>
 
-              {/* Slider switch dots indicators */}
-              <div className="flex items-center space-x-2.5 pt-4">
-                {testimonials.map((_, idx) => (
+              {/* Slider switch dots indicators + arrows */}
+              <div className="flex items-center justify-between pt-4">
+                <div className="flex items-center space-x-2.5">
+                  {testimonials.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveTesti(idx)}
+                      className={`h-1.5 focus:outline-none rounded-full transition-all duration-500 cursor-pointer ${
+                        activeTesti === idx ? 'bg-[#C4A47C] w-10' : 'bg-white/10 hover:bg-white/20 w-5'
+                      }`}
+                      aria-label={`Testimonial ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+                <div className="flex items-center space-x-2">
                   <button
-                    key={idx}
-                    onClick={() => setActiveTesti(idx)}
-                    className={`h-1.5 focus:outline-none rounded-full transition-all duration-500 cursor-pointer ${
-                      activeTesti === idx ? 'bg-[#C4A47C] w-10' : 'bg-white/10 hover:bg-white/20 w-5'
-                    }`}
-                    aria-label={`Testimonial ${idx + 1}`}
-                  />
-                ))}
+                    onClick={prevTesti}
+                    className="w-9 h-9 rounded-full bg-white/5 hover:bg-[#C4A47C] hover:text-black border border-white/10 flex items-center justify-center text-white transition-all cursor-pointer"
+                    aria-label="Previous testimonial"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={nextTesti}
+                    className="w-9 h-9 rounded-full bg-white/5 hover:bg-[#C4A47C] hover:text-black border border-white/10 flex items-center justify-center text-white transition-all cursor-pointer"
+                    aria-label="Next testimonial"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             </motion.div>
 
-            {/* Testimonials dynamic container card */}
-            <div className="lg:col-span-2 relative min-h-[300px] flex items-center">
+            {/* Testimonials dynamic container card — draggable/swipeable */}
+            <div className="lg:col-span-2 relative min-h-[300px] flex items-center overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeTesti}
@@ -720,7 +733,14 @@ export default function Home() {
                   animate={{ opacity: 1, x: 0, scale: 1 }}
                   exit={{ opacity: 0, x: -24, scale: 0.98 }}
                   transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="bg-white/[0.02] border border-white/5 p-8 sm:p-12 rounded-sm relative w-full space-y-6"
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.25}
+                  onDragEnd={(_, info) => {
+                    if (info.offset.x < -60) nextTesti();
+                    else if (info.offset.x > 60) prevTesti();
+                  }}
+                  className="bg-white/[0.02] border border-white/5 p-6 sm:p-12 rounded-sm relative w-full space-y-6 cursor-grab active:cursor-grabbing touch-pan-y select-none"
                 >
                   {/* Rating stars style */}
                   <div className="flex space-x-1">

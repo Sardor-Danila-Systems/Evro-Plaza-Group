@@ -127,11 +127,11 @@ export default function Header() {
 
               {/* Direct Call Center */}
               <a
-                href="tel:+998663000000"
+                href="tel:+998880000010"
                 className="flex items-center space-x-2 text-white/90 hover:text-[#C4A47C] transition-all text-sm font-semibold"
               >
                 <Phone className="w-4 h-4 text-[#C4A47C]" />
-                <span className="font-mono text-xs">+998 66 300-00-00</span>
+                <span className="font-mono text-xs">+998 88 000-00-10</span>
               </a>
 
               {/* Consultation Button */}
@@ -146,7 +146,7 @@ export default function Header() {
             {/* Mobile Actions Container (Burger & Language Toggle Mobile) */}
             <div className="flex md:hidden items-center space-x-4">
               <a
-                href="tel:+998663000000"
+                href="tel:+998880000010"
                 className="p-2 text-gray-300 hover:text-[#C4A47C] transition-colors"
                 aria-label="Call"
               >
@@ -230,8 +230,8 @@ export default function Header() {
               </div>
 
               <div className="text-center font-mono space-y-2 text-[#C4A47C] text-sm">
-                <a href="tel:+998663000000" className="block hover:underline">
-                  +998 66 300 00 00
+                <a href="tel:+998880000010" className="block hover:underline">
+                  +998 88 000 00 10
                 </a>
                 <span className="block text-gray-500 text-xs">info@evroplaza.uz</span>
               </div>

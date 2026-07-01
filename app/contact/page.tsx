@@ -11,7 +11,7 @@ import { useTranslation } from '@/lib/i18n/useTranslation';
 import ParallaxImage from '@/components/ParallaxImage';
 
 const branchData = {
-  phones: ['+998 66 300-00-00'],
+  phones: ['+998 88 000-00-10'],
   email: 'info@evroplaza.uz',
   mapImage: '/projects/avenue-plaza/gallery1.jpg',
 };

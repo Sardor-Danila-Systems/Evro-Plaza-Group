@@ -95,7 +95,6 @@ function ProjectsListContent() {
               <option value="all">{t('projects.list.typeAll')}</option>
               <option value="residential">{t('projects.list.typeResidential')}</option>
               <option value="commercial">{t('projects.list.typeCommercial')}</option>
-              <option value="villas">{t('projects.list.typeVillas')}</option>
             </select>
           </div>
 
@@ -128,6 +127,7 @@ function ProjectsListContent() {
               >
                 <option value="all">{t('projects.list.geographyAll')}</option>
                 <option value="самарканд">{t('projects.list.geographySamarkand')}</option>
+                <option value="фергана">{t('projects.list.geographyFergana')}</option>
               </select>
               {(selectedType !== 'all' || selectedStatus !== 'all' || selectedCity !== 'all' || searchQuery !== '') && (
                 <button

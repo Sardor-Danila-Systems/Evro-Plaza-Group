@@ -1,15 +1,17 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function Loader() {
   const [loading, setLoading] = useState(true);
+  const pathname = usePathname();
+  const isFirstRender = useRef(true);
 
+  // Initial page load: wait for full window load (images, fonts), min 900ms
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
-
     const minDelay = new Promise<void>((resolve) => setTimeout(resolve, 900));
     const pageReady =
       document.readyState === 'complete'
@@ -22,10 +24,23 @@ export default function Loader() {
     return () => clearTimeout(fallback);
   }, []);
 
+  // Route changes: briefly show the loader so heavy pages/images never flash unstyled
   useEffect(() => {
-    if (!loading) {
-      document.body.style.overflow = '';
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
     }
+    setLoading(true);
+    const timer = setTimeout(() => setLoading(false), 700);
+    return () => clearTimeout(timer);
+  }, [pathname]);
+
+  // Lock scroll while the loader is visible
+  useEffect(() => {
+    document.body.style.overflow = loading ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [loading]);
 
   return (

@@ -12,7 +12,7 @@ export interface LocalizedProject {
   longDescription: LocalizedText;
   status: 'completed' | 'construction' | 'sales' | 'upcoming';
   statusLabel: LocalizedText;
-  type: 'residential' | 'commercial' | 'mixed' | 'villas';
+  type: 'residential' | 'commercial' | 'mixed';
   typeLabel: LocalizedText;
   location: LocalizedText;
   city: string;
@@ -70,11 +70,11 @@ export const projectsData: LocalizedProject[] = [
       uz: 'Qurilmoqda (2027-yilda topshiriladi)',
       en: 'Under construction (completion in 2027)',
     },
-    type: 'mixed',
+    type: 'residential',
     typeLabel: {
-      ru: 'Жилой комплекс премиум бизнес-класса',
-      uz: 'Premium biznes toifali turar-joy majmuasi',
-      en: 'Premium business-class residential complex',
+      ru: 'Премиальный жилой комплекс',
+      uz: 'Premium turar-joy majmuasi',
+      en: 'Premium residential complex',
     },
     location: {
       ru: 'Самарканд, улица Умара Жура Кулова (за ЖК "Самарканд")',
